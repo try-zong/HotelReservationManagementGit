@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.OrderMapper">
+	<!--插入订单，主键自增-->
+	<insert id="addOrder" parameterType="Order" keyProperty="id" useGeneratedKeys="true">
+   		insert into `order` (money,in_time,out_time,types,phone,room_id,user_account2) values(#{money},#{in_time},#{out_time},#{types},#{phone},#{room.id},#{user.account})
+	</insert>
+
+    <select id="getOne"  resultType="Order" parameterType="Integer" > 
+    	select * from `Order` where id=#{id}
+    </select >
+    <select id="selectAllOrderByPage"  parameterType="PageInfo" resultType="Order"> 
+    	select * from `Order` limit #{offset},#{rows}
+	</select >
+	<!--分类查询所属新闻类别的数量-->
+	<select id="selectOrderByUserAccountAndPage"  resultType="Order" > 
+    	select * from `Order` 	
+    	<where>
+    		<if test="account!=null">
+    			and user_account2=#{account} 
+    		</if>
+    	</where>
+    		limit #{offset},#{rows}
+    </select >
+    <select id="selectOrderByUserAccountAndTypesAndPage"  resultType="Order" > 
+    	select * from `Order` 	
+    	<where>
+    		<if test="account!=null">
+    			and user_account2=#{account} and types=#{types}
+    		</if>
+    	</where>
+    		limit #{offset},#{rows}
+    </select >
+	<select id="selectOrderCountByUserAccountAndPage"  resultType="Integer" > 
+    	select count(*) from `Order` where  user_account2=#{account} 
+    </select >
+</mapper> 

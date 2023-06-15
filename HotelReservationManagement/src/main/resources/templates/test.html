@@ -1,0 +1,26 @@
+<!DOCTYPE html> 
+<html lang="en" xmlns:th="https://www.thymeleaf.org"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <title>register</title> 
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head> 
+    <meta charset="UTF-8">
+    <title>register_account</title>
+</head>
+<body>
+ <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: '/test',
+                type: 'GET',
+                success: function(Menu) {
+                    var jsonDataContainer = $('#jsonDataContainer');
+                    jsonDataContainer.html(Menu);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

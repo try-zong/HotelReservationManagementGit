@@ -1,0 +1,20 @@
+<!DOCTYPE html> 
+<html lang="en" xmlns:th="https://www.thymeleaf.org"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <title>login</title> 
+    <link rel = "stylesheet" type="text/css"  th:href="@{/css/login.css}" />
+</head> 
+<body> 
+<form th:action="@{/toLogin}" method="post" th:object="${User}"> 
+	<h2>用户登录</h2>
+    用户名：<input  type="text" th:field="*{account}" placeholder="请输入用户名" ><br> 
+    密&emsp;码： <input  type="password" th:field="*{password}" placeholder="请输入密码" ><br> 
+	<input  type = "submit" name="Submit" value = "登录"  />
+	<input  type = "reset"  name="Reset"  value = "重置" />
+	<p style="font-size:16;color:grey;">&nbsp;&nbsp;没有账号？<br/><a th:href="@{/add}">点击这里注册</a> </p>
+
+</form>
+
+</body> 
+</html>
