@@ -19,6 +19,12 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	public int selectRoomIdById(int id) {
+		// TODO Auto-generated method stub
+		return orderMapper.selectRoomIdById(id);
+	}
+
+	@Override
 	public List<Order> selectOrderByUserAccountAndPage(String account,PageInfo page) {
 		// TODO Auto-generated method stub
 		int rows = page.getRows();
@@ -30,6 +36,12 @@ public class OrderServiceImpl implements OrderService {
 	public int selectOrderCountByUserAccountAndPage(String account) {
 		// TODO Auto-generated method stub
 		return orderMapper.selectOrderCountByUserAccountAndPage(account);
+	}
+
+	@Override
+	public int selectOrderCount() {
+		// TODO Auto-generated method stub
+		return orderMapper.selectOrderCount();
 	}
 
 	@Override
@@ -57,6 +69,13 @@ public class OrderServiceImpl implements OrderService {
 		// TODO Auto-generated method stub
 		return orderMapper.addOrder(order);
 	}
+	
+	@Override
+	public int updateOrderStateById(int id) {
+		// TODO Auto-generated method stub
+		return orderMapper.updateOrderStateById(id);
+	}
+
 	//删除订单
 	@Override
 	public int deleteOrderById(int id) {

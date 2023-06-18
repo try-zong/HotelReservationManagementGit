@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.entity.Manager;
 import com.example.entity.Order;
 import com.example.entity.PageInfo;
 import com.example.entity.Room;
@@ -43,19 +44,29 @@ public class OrderController {
 		//order.setRoom_id(roomId);
 		order.setTypes(room.getTypes());
 		order.setMoney(room.getPrice());
+		session.setAttribute("room", room);
 		model.addAttribute("order",order);
 		return "reservation";
 	}
 	@RequestMapping("/toReservation")
 	public String toReservation(@ModelAttribute("order") Order order,
 			HttpSession session, Model model){
+		log.info(String.valueOf(order.getRoom().getId())+"前"+String.valueOf(order.getRoom().getVersion()));
 		//提取用户信息
 		User user = (User)session.getAttribute("User");
 		order.setUser(user);
-		log.info("类型"+order.getTypes()+order.getUser().getAccount());
-		orderService.addOrder(order);
-		roomService.updateRoomStateById(order.getRoom().getId());
-		return "redirect:/manageOrder";
+		//提取房间信息
+		Room room = (Room)session.getAttribute("room");
+		//乐观锁，判断是否有人提前预订
+		int i = roomService.updateRoomStateById(room);
+		if(i == 0) {
+			return "redirect:/main";
+		}else {
+			//预订成功，返回订单管理页面
+			orderService.addOrder(order);
+			return "redirect:/manageOrder";
+		}
+		
 	}
 	
 	//用户订单管理控制
@@ -105,8 +116,37 @@ public class OrderController {
 	//删除订单控制
 	@RequestMapping("/deleteOrder")//将请求映射为下列方法的注解
 	public String DeleteOrder(Integer id,Integer totalcount,Model model) {
-		orderService.deleteOrderById(id);		
+		roomService.updateRoomStateTureById(orderService.selectRoomIdById(id));
+		orderService.deleteOrderById(id);	
 		model.addAttribute("totalcount",totalcount--);
 		return "forward:manageOrder";
+	}
+	//修改订单状态
+	@RequestMapping("/updateOrderState")//将请求映射为下列方法的注解
+	public String updateOrderState(Integer id,Integer totalcount,Model model) {
+		orderService.updateOrderStateById(id);	
+		model.addAttribute("totalcount",totalcount);
+		return "forward:manageOrder";
+	}
+	
+	//管理员部分订单控制
+
+	//用户订单管理控制
+	@RequestMapping("/manageUserOrder")
+	public String toManagerMain(Integer totalcount, Integer pageCur,
+			HttpSession session, Model model){
+		Order allOrder = new Order();
+		//Manager manager = (Manager)session.getAttribute("User");
+		PageInfo  page =pageService.set(totalcount, pageCur);
+		List<Order> orderList = new ArrayList<Order>();
+		orderList =orderService.selectAllOrderByPage(page);
+		totalcount =orderService.selectOrderCount();
+		int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;	
+		model.addAttribute("orderList",orderList);
+		model.addAttribute("AllOrder", allOrder);
+		model.addAttribute("totalcount",totalcount);
+		model.addAttribute("totalpage",totalpage);
+		model.addAttribute("pageCur",page.getPageCur());
+		return "manageUserOrder";
 	}
 }

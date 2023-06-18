@@ -9,5 +9,6 @@ public class User implements Serializable{
 	private String account;  
 	private int  age;
 	private String name;  
+	private String img;  
 	private String password;  
 }

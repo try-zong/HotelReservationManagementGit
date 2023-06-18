@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.entity.Manager;
 import com.example.entity.User;
 import com.example.service.MenuService;
 import com.example.service.UserService;
@@ -47,6 +48,32 @@ public class LoginController {
 			//登录失败，跳回登录页面
 			model.addAttribute("User",userLog);
 			return "login";
+		}
+	}
+	
+	//管理员登录
+	@RequestMapping({"/magLogin"})
+	public String magLogin( Model model) {
+		Manager magnew = new Manager();
+		model.addAttribute("Mag",  magnew);
+		return "maglogin";
+	}
+	@RequestMapping("/toMagLogin")
+	public String toMagLogin(@ModelAttribute Manager managerLog,HttpSession session, Model model) {
+		int idLog =  managerLog.getId();
+		String passwordLog  = managerLog.getPassword();
+		Manager manager = userService.findManagerByIdAndpwd(idLog, passwordLog);
+		if(manager != null) {
+			//登录的用户信息存入session并跳转主页面
+			session.setAttribute("Mag",managerLog);
+			//生成树形菜单并存入session
+			session.setAttribute("Menu",menuService.selectMenuByParentId(0));
+			log.info(String.valueOf(menuService.selectMenuByParentId(0)));
+			return "redirect:/magRoom";
+		}else {
+			//登录失败，跳回登录页面
+			model.addAttribute("Mag",managerLog);
+			return "maglogin";
 		}
 	}
 }

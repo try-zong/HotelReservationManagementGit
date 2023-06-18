@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>EditRoomInfo</title>
+</head>
+<body>
+	<form th:action="@{/userInfoMag}" method="post" th:object="${User}" enctype="multipart/form-data"> 
+       <table>
+    	<tr>
+    		<td >账号名</td>
+    		<td><input contenteditable="true" type="text" th:field="*{account}"></td>
+   			<td >年龄</td>
+   			<td><input contenteditable="true" type="text" th:field="*{age}"></td>
+    	</tr>
+    	<tr>
+			<td >姓名</td>
+			<td><input contenteditable="true" type="text" th:field="*{name}"></td>
+    	</tr>
+    	<tr>
+			<td><input type="file" name="file"/></td>
+			<img th:src="*{img}" style="width:100px; height: 100px;"/>
+    	</tr>
+		<tr>
+			<td><button type = "submit" th:text="确认修改" /></button></td>
+			<td><input type = "reset" value = "重置" /></td>
+		    <td>取消</td>
+		</tr>
+	  </table>	
+	</form>
+</body>
+</html>

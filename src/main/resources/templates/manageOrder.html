@@ -22,6 +22,7 @@
 				<th><div style="text-align:center;">房间类型</div></th>
 				<th><div style="text-align:center;">价格</div></th>
 				<th><div style="text-align:center;">联系电话</div></th>
+				<th><div style="text-align:center;">订单状态</div></th>
 			</thead>
 				<tr th:each="order:${orderList}">
 					<!-- 循环-->       
@@ -29,7 +30,10 @@
 	    			<td><a th:text="${order.types}"></a></td>
 	    			<td><a th:text="${order.money}"></a></td>
 	   				<td><a th:text="${order.phone}"></a>
-	   				<a  th:href="@{deleteOrder(id=${order.id},totalcount=${totalcount})}"th:onclick="alertInfo()">删除订单</a></td>    
+	   				<td><a th:text="${order.state}" th:if="${order.state}==已完成"></a>
+	   				<a  th:href="@{updateOrderState(id=${order.id},totalcount=${totalcount})}"th:onclick="alertInfo()" th:if="${order.state}==进行中" th:text="订单进行中，确认已完成？" ></a>
+	   				<a  th:href="@{deleteOrder(id=${order.id},totalcount=${totalcount})}"th:onclick="alertInfo()">删除订单</a></td> 
+	   				
 				</tr> 
 		<tr>
 		<td >

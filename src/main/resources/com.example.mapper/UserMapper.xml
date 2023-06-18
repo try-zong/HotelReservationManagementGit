@@ -18,4 +18,13 @@
     <delete id="deleteUser" >
     	delete from user where account=#{account}
     </delete>
+    <update id="saveUser"  parameterType="User" >
+		update User set account=#{account},age=#{age},name=#{name},img=#{img} 
+		where account=#{account}
+	</update>
+    
+    <!--管理员语句-->
+    <select id="findManagerByIdAndpwd"  resultType="Manager" > 
+    	select * from manager where id=#{id} and password=#{password}
+    </select > 
 </mapper> 

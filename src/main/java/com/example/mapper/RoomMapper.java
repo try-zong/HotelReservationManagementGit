@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.example.entity.PageInfo;
 import com.example.entity.Room;
@@ -18,10 +19,13 @@ public interface RoomMapper {
     //分类分页查询房间，page包含分页信息
     public List<Room> selectAllRoomByPage(PageInfo page);
     public int selectRoomCount();//查询房间数量
-    @Insert("insert into room(id,state,info,types,comment,price) values(#{id},#{state},#{info},#{types},#{comment},#{price}) ")
+    @Insert("insert into room(id,state,info,types,comment,price,img) values(#{id},#{state},#{info},#{types},#{comment},#{price},#{img}) ")
     public int addRoom(Room room); //添加房间
     @Delete("delete from Room where id=#{id}")
     public int  deleteRoom(int id); //删除一个房间
     public int  updateRoomById(Room room); //修改房间信息
-    public int updateRoomStateById(int id); //修改房间状态，用户预订
+    @Update("update Room set state='可租'  where id=#{id}")
+    public int  updateRoomStateTureById(int id); //修改房间状态可租
+    public int updateRoomStateById(Room room); //修改房间状态，用户预订
+    public int saveEdit(Room room); //修改房间信息
 }

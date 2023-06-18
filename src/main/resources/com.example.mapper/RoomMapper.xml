@@ -26,8 +26,13 @@
 	<select id="selectRoomCount"  resultType="Integer" > 
     	select count(*) from Room
     </select >
-    <update id="updateRoomStateById"  parameterType="Integer" >
-		update Room set state="不可租"
+    <update id="updateRoomStateById"  parameterType="Room" >
+		update Room set state="不可租",version=#{version}+1
+		where id=#{id} and version = #{version}
+	</update>
+	<update id="saveEdit"  parameterType="Room" >
+		update Room set id=#{id},state=#{state},info=#{info} ,types=#{types},comment=#{comment},price=#{price}
+		,img=#{img} 
 		where id=#{id}
 	</update>
 </mapper> 

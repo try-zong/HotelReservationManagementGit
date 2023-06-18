@@ -2,7 +2,10 @@ package com.example.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
 
+import com.example.entity.Manager;
+import com.example.entity.Room;
 import com.example.entity.User;
 
 
@@ -17,4 +20,10 @@ public interface UserService {
 	public int updateUser(User user);
 	//根据账号密码获取用户信息
 	public User findUserByAccountAndpwd(String account,String password);
+    public int saveUser(User user,MultipartFile file); //修改用户信息
+	//管理员方法
+	//根据账号密码获取用户信息
+	public Manager findManagerByIdAndpwd(int id,String password);
+	public int getManagerId(int id);	//获得一个用户信息
+
 }

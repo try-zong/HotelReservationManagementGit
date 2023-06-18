@@ -2,7 +2,7 @@ package com.example.service;
 
 import java.util.List;
 
-
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.entity.PageInfo;
 import com.example.entity.Room;
@@ -17,8 +17,10 @@ public interface RoomService {
     //分类分页查询房间，page包含分页信息
     public List<Room> selectAllRoomByPage(PageInfo page);
     public int selectRoomCount();
-    public int addRoom(Room room); //添加房间
+    public int addRoom(Room room,MultipartFile file); //添加房间
     public int deleteRoom(int id); //删除一个房间
     public int updateRoomById(Room room); //修改房间信息
-    public int updateRoomStateById(int id); //修改房间状态，用户预订
+    public int updateRoomStateTureById(int id); //修改房间状态可租
+    public int updateRoomStateById(Room room); //修改房间状态，用户预订
+    public boolean saveEdit(Room room,MultipartFile file); //修改房间信息
 }
