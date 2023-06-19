@@ -1,5 +1,6 @@
 package com.example.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,6 +80,38 @@ public class OrderServiceImpl implements OrderService {
 	//删除订单
 	@Override
 	public int deleteOrderById(int id) {
+		// TODO Auto-generated method stub
+		Order order =orderMapper.getOne(id);
+        order.setDeleted(1);
+        order.setDeletedAt(LocalDateTime.now()); //返回当前删除时间
+		return orderMapper.updateOrderByOrder(order);
+	}
+
+	@Override
+	public int recoverOrder(int id) {
+		// TODO Auto-generated method stub
+		Order order =orderMapper.getOne(id);
+        order.setDeleted(0);
+        order.setDeletedAt(null); //返回当前删除时间
+		return orderMapper.updateOrderByOrder(order);
+	}
+
+	@Override
+	public List<Order> selectDeletedOrderByUserAccountAndPage(String account, PageInfo page) {
+		// TODO Auto-generated method stub
+		int rows = page.getRows();
+	    int offset = page.getOffset();
+		return orderMapper.selectDeletedOrderByUserAccountAndPage(account, offset, rows);
+	}
+
+	@Override
+	public int selectDeletedOrderCountByUserAccountAndPage(String account) {
+		// TODO Auto-generated method stub
+		return orderMapper.selectDeletedOrderCountByUserAccountAndPage(account);
+	}
+	//彻底删除订单
+	@Override
+	public int delOrderWholly(int id) {
 		// TODO Auto-generated method stub
 		return orderMapper.deleteOrderById(id);
 	}

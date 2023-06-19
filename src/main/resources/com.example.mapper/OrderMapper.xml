@@ -17,14 +17,14 @@
     </select >
     <!--获取所有订单-->
     <select id="selectAllOrderByPage"  parameterType="PageInfo" resultType="Order"> 
-    	select * from `Order` limit #{offset},#{rows}
+    	select * from `Order` where deleted=0 limit #{offset},#{rows}
 	</select >
 	<!--根据用户名字查询所有订单-->
 	<select id="selectOrderByUserAccountAndPage"  resultType="Order" > 
     	select * from `Order` 	
     	<where>
     		<if test="account!=null">
-    			and user_account2=#{account} 
+    			and user_account2=#{account} and deleted=0
     		</if>
     	</where>
     		limit #{offset},#{rows}
@@ -34,17 +34,39 @@
     	select * from `Order` 	
     	<where>
     		<if test="account!=null">
-    			and user_account2=#{account} and types=#{types}
+    			and user_account2=#{account} and types=#{types} and deleted=0
     		</if>
     	</where>
     		limit #{offset},#{rows}
     </select >
     <!--获取某用户订单数量-->
 	<select id="selectOrderCountByUserAccountAndPage"  resultType="Integer" > 
-    	select count(*) from `Order` where  user_account2=#{account} 
+    	select count(*) from `Order` where  user_account2=#{account} and deleted=0
     </select >
         <!--获取订单数量-->
 	<select id="selectOrderCount"  resultType="Integer" > 
-    	select count(*) from `Order`
+    	select count(*) from `Order` and deleted=0
+    </select >
+    <!--修改订单-->
+	<update id="updateOrderByOrder" parameterType="Order">
+   		update `order` set money=#{money},in_time=#{in_time},out_time=#{out_time},
+   		state=#{state},types=#{types},phone=#{phone},room_id=#{room_id},
+   		user_account2=#{user_account2},deleted=#{deleted},deletedAt=#{deletedAt}
+   		where id=#{id}
+	</update>
+	<!-- 回收站部分-->
+		<!--根据用户名字查询所有已删除订单-->
+	<select id="selectDeletedOrderByUserAccountAndPage"  resultType="Order" > 
+    	select * from `Order` 	
+    	<where>
+    		<if test="account!=null">
+    			and user_account2=#{account} and deleted=1
+    		</if>
+    	</where>
+    		limit #{offset},#{rows}
+    </select >
+        <!--获取某用户已删除订单数量-->
+	<select id="selectDeletedOrderCountByUserAccountAndPage"  resultType="Integer" > 
+    	select count(*) from `Order` where  user_account2=#{account} and deleted=1
     </select >
 </mapper> 

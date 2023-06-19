@@ -1,0 +1,106 @@
+<!DOCTYPE html> 
+<html lang="en" xmlns:th="https://www.thymeleaf.org"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <title>show</title> 
+    <script type="text/javascript" src="${pageContext.request.contextPath }/js/echarts.min.js"></script>
+	<script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+ 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ 	<style>
+        #chartsContainer {
+            display: flex;
+            height: 40vh;
+        }
+
+        .chartContainer {
+            width: 30%;
+            padding: 30px;
+        }
+
+        .chartCanvas {
+            width: 30%;
+            height: 30%;
+        }
+    </style>
+</head> 
+<body>
+    <div id="chartsContainer">
+        <div class="chartContainer">
+            <h6>最热门的房间</h2>
+            <canvas id="barChart" class="chartCanvas"></canvas>
+        </div>
+
+        <div class="chartContainer">
+            <h6>房间类型趋势</h6>
+            <canvas id="pieChart" class="chartCanvas"></canvas>
+        </div>
+    </div>
+
+    <script th:inline="javascript">
+        // Bar Chart
+        var barRoomNames = /*[[${topThree.![name]}]]*/ [];
+        var barRoomCounts = /*[[${topThree.![num]}]]*/ [];
+
+        var barChartCanvas = document.getElementById('barChart');
+        var barChartCtx = barChartCanvas.getContext('2d');
+		//柱状图
+        new Chart(barChartCtx, {
+            type: 'bar',
+            data: {
+                labels: barRoomNames,
+                datasets: [{
+                    label: '房间数量',
+                    data: barRoomCounts,
+                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: Math.max(...barRoomCounts) + 5
+                    }
+                }
+            }
+        });
+
+        //饼图
+        var pieRoomData = [
+            /*[# th:each="room : ${roomScale}"]*/
+            {
+                name: /*[[${room.name}]]*/ '',
+                scale: /*[[${room.scale}]]*/ 0,
+                num: /*[[${room.num}]]*/
+            },
+            /*[/]*/
+        ];
+
+        var pieChartCanvas = document.getElementById('pieChart');
+        var pieChartCtx = pieChartCanvas.getContext('2d');
+        
+        new Chart(pieChartCtx, {
+            type: 'pie',
+            data: {
+                labels: pieRoomData.map(function(room) { return room.name; }),
+                datasets: [{
+                    data: pieRoomData.map(function(room) { return room.scale; }),
+                    backgroundColor: ['rgba(255, 99, 132, 0.8)', 'rgba(54, 162, 235, 0.8)', 'rgba(255, 206, 86, 0.8)', 'rgba(75, 192, 192, 0.8)'],
+                    borderColor: '#fff',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        });
+    </script>
+</body>
+</html>

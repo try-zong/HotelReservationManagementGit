@@ -2,6 +2,7 @@ package com.example.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 
 import com.example.entity.Order;
 import com.example.entity.PageInfo;
@@ -24,5 +25,11 @@ public interface OrderService {
     public int  updateOrderStateById(int id);
 	//删除订单
 	public int deleteOrderById(int id);
-	
+	//回收站部分
+	//通过用户名查询已删除订单
+	public List<Order> selectDeletedOrderByUserAccountAndPage(String account,PageInfo page);
+	//通过用户名查询已删除订单数量
+	public int selectDeletedOrderCountByUserAccountAndPage(String account);
+	public int recoverOrder(int id); //恢复订单
+	public int delOrderWholly(int id); //彻底删除订单
 }

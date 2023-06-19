@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.ShowMapper">
+	<resultMap id="roomHot" type="com.example.entity.Hot">
+    	<result property="name" column="name" />
+    	<result property="num" column="num" />
+    	<result property="scale" column="scale" />
+  	</resultMap>
+	<select id="selectTopThreeRoom" resultMap="roomHot">
+        SELECT id as name, version  AS num
+    	FROM room
+    	ORDER BY version DESC
+    	LIMIT 5
+    </select>
+    <select id="selectTopOneRoom" resultMap="roomHot">
+        SELECT id as name, version  AS num
+    	FROM room
+    	ORDER BY version DESC
+    	LIMIT 1
+    </select>
+     <select id="selectCountGroupByTypes" resultMap="roomHot"> 
+    	SELECT types AS name, SUM(version) AS num,
+           SUM(version) * 1.0 / (SELECT SUM(version) FROM room) AS scale
+    	FROM room 
+    	GROUP BY types
+    </select>
+</mapper> 

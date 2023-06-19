@@ -115,7 +115,7 @@ public class OrderController {
 	//删除订单控制
 	@RequestMapping("/deleteOrder")//将请求映射为下列方法的注解
 	public String DeleteOrder(Integer id,Integer totalcount,Model model) {
-		roomService.updateRoomStateTureById(orderService.selectRoomIdById(id));
+		//roomService.updateRoomStateTureById(orderService.selectRoomIdById(id));
 		orderService.deleteOrderById(id);	
 		model.addAttribute("totalcount",totalcount--);
 		return "forward:manageOrder";
@@ -127,7 +127,39 @@ public class OrderController {
 		model.addAttribute("totalcount",totalcount);
 		return "forward:manageOrder";
 	}
-	
+	//回收站功能
+	@RequestMapping("/recover")
+	public String recover(Integer totalcount, Integer pageCur,
+			HttpSession session, Model model){
+		Order allOrder = new Order();
+		User user = (User)session.getAttribute("User");
+		PageInfo  page =pageService.set(totalcount, pageCur);
+		List<Order> orderList = new ArrayList<Order>();
+		orderList =orderService.selectDeletedOrderByUserAccountAndPage(user.getAccount(), page);
+		totalcount =orderService.selectDeletedOrderCountByUserAccountAndPage(user.getAccount());
+		int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;	
+		model.addAttribute("orderList",orderList);
+		model.addAttribute("AllOrder", allOrder);
+		model.addAttribute("totalcount",totalcount);
+		model.addAttribute("totalpage",totalpage);
+		model.addAttribute("pageCur",page.getPageCur());
+		return "recover";
+	}
+	//彻底删除订单控制
+	@RequestMapping("/delOrderWholly")//将请求映射为下列方法的注解
+	public String DelOrderWholly(Integer id,Integer totalcount,Model model) {
+		roomService.updateRoomStateTureById(orderService.selectRoomIdById(id));
+		orderService.delOrderWholly(id);	
+		model.addAttribute("totalcount",totalcount--);
+		return "forward:recover";
+	}
+	//恢复订单
+	@RequestMapping("/recoverOrder")//将请求映射为下列方法的注解
+	public String RecoverOrder(Integer id,Integer totalcount,Model model) {
+		orderService.recoverOrder(id);	
+		model.addAttribute("totalcount",totalcount--);
+		return "forward:recover";
+	}
 	//管理员部分订单控制
 
 	//所有订单管理
