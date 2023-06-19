@@ -2,7 +2,6 @@ package com.example.service;
 
 import org.springframework.stereotype.Service;
 
-import com.example.controller.RoomInfoController;
 import com.example.entity.PageInfo;
 
 import lombok.extern.slf4j.Slf4j;

@@ -5,13 +5,14 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.entity.Manager;
-import com.example.entity.Room;
+import com.example.entity.PageInfo;
 import com.example.entity.User;
 
 
 
 public interface UserService {
-	public List<User>findAll(); 	//获取所有用户信息
+	public List<User>findAll(PageInfo page); 	//获取所有用户信息
+	public int selectUserCount();//获取用户数量
 	public User getOne(String account);	//获得一个用户信息
 	public int addUser(User user);	//注册用户
 	//删除用户

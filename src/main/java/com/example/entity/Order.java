@@ -10,6 +10,8 @@ public class Order {
 	private String state;
 	private String types;
 	private String phone;
+	private String room_id;
+	private String user_account2;
 	private Room room;
 	private User user; 
 }

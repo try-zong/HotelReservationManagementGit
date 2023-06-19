@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.entity.User;
 import com.example.service.UserService;
 
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
+
 @Controller//定义控制器的注解
 public class RegiserController {
 	//注册用户账号

@@ -3,14 +3,11 @@ package com.example.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.example.entity.Order;
 import com.example.entity.PageInfo;
-import com.example.entity.Room;
 
 public interface OrderMapper {
 	public int addOrder(Order order); //添加订单

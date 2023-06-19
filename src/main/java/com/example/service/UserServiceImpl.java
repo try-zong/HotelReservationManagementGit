@@ -12,14 +12,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.entity.Constants;
 import com.example.entity.Manager;
+import com.example.entity.PageInfo;
 import com.example.entity.User;
 import com.example.mapper.UserMapper;
 
-import lombok.extern.slf4j.Slf4j;
 
 
 
-@Slf4j
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -33,14 +33,20 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
+	public int selectUserCount() {
+		// TODO Auto-generated method stub
+		return userMapper.selectUserCount();
+	}
+
+	@Override
 	public User findUserByAccountAndpwd(String account, String password) {
 		User user = userMapper.findUserByAccountAndpwd(account, password);
 		return user;
 	}
 	
 	@Override
-	public List<User> findAll() {
-		return userMapper.findAll();
+	public List<User> findAll(PageInfo page) {
+		return userMapper.findAll(page);
 	}
 
 	@Override

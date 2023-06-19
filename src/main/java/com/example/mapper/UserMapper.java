@@ -5,11 +5,13 @@ import java.util.List;
 import org.apache.ibatis.annotations.Select;
 
 import com.example.entity.Manager;
+import com.example.entity.PageInfo;
 import com.example.entity.User;
 
 
 public interface UserMapper {
-	public List<User>findAll();	//获取所有用户信息
+	public List<User>findAll(PageInfo page);	//获取所有用户信息
+	public int selectUserCount();//获取用户数量
 	public User getOne(String account);	//获得一个用户信息
 	public int addUser(User user);	//添加用户
 	public int deleteUser(String account);	//删除用户

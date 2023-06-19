@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.entity.Manager;
 import com.example.entity.Order;
 import com.example.entity.PageInfo;
 import com.example.entity.Room;
@@ -131,9 +130,9 @@ public class OrderController {
 	
 	//管理员部分订单控制
 
-	//用户订单管理控制
-	@RequestMapping("/manageUserOrder")
-	public String toManagerMain(Integer totalcount, Integer pageCur,
+	//所有订单管理
+	@RequestMapping("/magOrder")
+	public String magOrder(Integer totalcount, Integer pageCur,
 			HttpSession session, Model model){
 		Order allOrder = new Order();
 		//Manager manager = (Manager)session.getAttribute("User");
@@ -147,6 +146,6 @@ public class OrderController {
 		model.addAttribute("totalcount",totalcount);
 		model.addAttribute("totalpage",totalpage);
 		model.addAttribute("pageCur",page.getPageCur());
-		return "manageUserOrder";
+		return "magOrder";
 	}
 }

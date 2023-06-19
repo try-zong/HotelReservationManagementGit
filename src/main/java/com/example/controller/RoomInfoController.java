@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.entity.Order;
 import com.example.entity.PageInfo;
 import com.example.entity.Room;
-import com.example.entity.User;
 import com.example.service.PageService;
 import com.example.service.RoomService;
 
