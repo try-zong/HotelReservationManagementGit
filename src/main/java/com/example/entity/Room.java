@@ -3,7 +3,7 @@ import lombok.Data;
 
 @Data
 public class Room {
-	private int id;
+	private Integer id;
 	private String state;  
 	private String types; 
 	private String info;  
@@ -12,10 +12,11 @@ public class Room {
 	private long version;
 	private String img;
 	private String user_account1;
-	public int getId() {
+	
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getState() {

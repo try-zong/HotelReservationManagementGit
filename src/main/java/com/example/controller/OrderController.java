@@ -97,12 +97,12 @@ public class OrderController {
 	public String tofind( Integer totalcount, Integer pageCur, 
 			Model model,@ModelAttribute Order orderFid,HttpSession session) {
 		User user = (User)session.getAttribute("User");
-		int id = orderFid.getId();
+		Integer id = orderFid.getId();
 		String types = orderFid.getTypes();
 		List<Order> orderList = new ArrayList<Order>();
 		PageInfo  page = pageService.set(totalcount, pageCur);
 		Order ordernew = new Order();
-		if(id != 0 && types != null) {
+		if(id != null && types != null) {
 			orderList = Arrays.asList(orderService.getOne(id));
 		}else if(types!=null) {
 			orderList = orderService.selectOrderByUserAccountAndTypesAndPage(user.getAccount(), types, page);

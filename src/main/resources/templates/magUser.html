@@ -3,15 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>MagUser</title>
+    <link rel="stylesheet" type="text/css" href="css/order.css">
 </head>
 <body>
+<div class="tab-bar">
+<ul class="menu">
+        <li>
+            <a href="/show">
+                <i class="el-icon-house"></i>
+                <span>首页</span>
+            </a>
+        </li>
+        <li>
+            <a href="/magOrder">
+                <i class="el-icon-user"></i>
+                <span>订单管理</span>
+            </a>
+        </li>
+        <li>
+           <a href="/magUser">
+                <i class="el-icon-s-management"></i>
+                <span>用户管理</span>
+            </a>   
+        </li>
+        <li>
+            <a href="/magRoom">
+                <i class="el-icon-message"></i>
+                <span>房间管理</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="container">
+	  <div class="table-container">
         <table> 
-			<thead >
-				<th><div style="text-align:center;">账号名</div></th>
-				<th><div style="text-align:center;">年龄</div></th>
-				<th><div style="text-align:center;">名字</div></th>
-				<th><div style="text-align:center;">操作</div></th>
+			<thead>
+				<tr>
+					<th><div style="text-align:center;">账号名</div></th>
+					<th><div style="text-align:center;">年龄</div></th>
+					<th><div style="text-align:center;">名字</div></th>
+					<th><div style="text-align:center;">操作</div></th>
+				</tr>
 			</thead>
+			<tbody>
 				<tr th:each="user:${userList}">
 					<!-- 循环-->       
 					<td><a th:text="${user.account}" ></a></td>    
@@ -19,16 +53,18 @@
 	    			<td><a th:text="${user.name}"></a></td>
 	   				<td><a th:href="@{deleteUser(account=${user.account},totalcount=${totalcount})}">删除该用户</a></td>  
 				</tr> 
-		<tr>
-		<td >
-			<li><a>共<span th:text="${totalcount}"></span>条记录</a></li>
-			<li><a>共<span th:text="${totalpage}"></span>页</a></li>
-			<li><a>第<span th:text="${pageCur}"></span>页</a></li>
-			<li><a th:href="@{magUser(totalcount=${totalcount},pageCur=${pageCur}-1)}" th:if="${pageCur!=1}">上一页</a></li>
-			<li><a th:href="@{magUser(totalcount=${totalcount},pageCur=${pageCur}+1)}" th:if="${pageCur<totalpage}">下一页</a></li>
-		</td>
-		</tr>
-        </table>
-
+			</tbody>
+		 </table>
+		</div>
+		<div class="pagination-container">
+			<ul>
+				<li><a>共<span th:text="${totalcount}"></span>条记录</a></li>
+				<li><a>共<span th:text="${totalpage}"></span>页</a></li>
+				<li><a>第<span th:text="${pageCur}"></span>页</a></li>
+				<li><a th:href="@{magUser(totalcount=${totalcount},pageCur=${pageCur}-1)}" th:if="${pageCur!=1}">上一页</a></li>
+				<li><a th:href="@{magUser(totalcount=${totalcount},pageCur=${pageCur}+1)}" th:if="${pageCur<totalpage}">下一页</a></li>
+			</ul>
+        </div>
+</div>
 </body>
 </html>

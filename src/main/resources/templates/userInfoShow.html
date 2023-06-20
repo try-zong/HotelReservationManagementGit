@@ -3,26 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <title>userInfoShow</title>
+     <link rel="stylesheet" type="text/css" href="css/order.css">
 </head>
 <body>
+<div class="tab-bar">
+<ul class="menu">
+        <li>
+            <a href="/show">
+                <i class="el-icon-house"></i>
+                <span>网站概览</span>
+            </a>
+        </li>
+        <li>
+            <a href="/main">
+                <i class="el-icon-user"></i>
+                <span>房间信息</span>
+            </a>
+        </li>
+        <li>
+           <a href="/manageOrder">
+                <i class="el-icon-s-management"></i>
+                <span>查看订单</span>
+            </a>   
+        </li>
+        <li>
+            <a href="/recover">
+                <i class="el-icon-message"></i>
+                <span>回收站</span>
+            </a>
+        </li>
+        <li>
+        	<a href="/userMag">
+            <span>
+                <i class="el-icon-s-tools"></i>
+                <span>个人信息</span>
+            </span>
+            </a>
+        </li>
+    </ul>
+</div>
+ <div class="container">
+        <div class="login-wrapper">
 	<form th:object="${User}" enctype="multipart/form-data"> 
-       <table>
-    	<tr>
-    		<td><img th:src="*{img}" style="width:100px; height: 100px;"/></td>
-    		<td >账号名</td>
-    		<td><input contenteditable="true" type="text" th:field="*{account}"></td>
-   			<td >年龄</td>
-   			<td><input contenteditable="true" type="text" th:field="*{age}"></td>
-    	</tr>
-    	<tr>
-			<td >姓名</td>
-			<td><input contenteditable="true" type="text" th:field="*{name}"></td>
-    	</tr>
-		<tr>
-			<td><a th:href="@{/userMag}"th:onclick="alertInfo()"  th:text="修改" /></a></td>
-		    <td>取消</td>
-		</tr>
-	  </table>	
+       <div class="header"></div>
+       <div class="form-wrapper">
+       		<img th:src="*{img}" style="width:100px; height:100px;"/>
+       		<input contenteditable="true" type="text" placeholder="请输入用户名" th:field="*{account}" class="input-item"/>	
+   			<input contenteditable="true" type="text" placeholder="请输入年龄" th:field="*{age}" class="input-item"/>
+       		<input contenteditable="true" type="text" placeholder="请输入姓名" th:field="*{name}" class="input-item"/>
+       </div>
+    	<div>
+    		<a th:href="@{/userMag}"th:onclick="alertInfo()"  th:text="修改" /></a>
+    		<a th:href="@{/userMag}"th:onclick="alertInfo()"  th:text="取消" /></a>
+    	</div>
 	</form>
+	</div>
+	</div>
 </body>
 </html>

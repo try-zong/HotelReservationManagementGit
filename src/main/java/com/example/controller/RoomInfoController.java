@@ -43,8 +43,8 @@ public class RoomInfoController {
 		List<Room> roomList =roomService.selectAllRoomByPage(page);
 		int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;
 		Room roomnew = new Room();
-		log.info("totalpag="+String.valueOf(totalpage));
-		log.info("PageCur="+String.valueOf(page.getPageCur()));
+	//	log.info("totalpag="+String.valueOf(totalpage));
+	//	log.info("PageCur="+String.valueOf(page.getPageCur()));
 		List<Hot> topThree = new ArrayList<Hot>();
 		topThree = showService.selectTopThreeRoom();
 		model.addAttribute("topThree",topThree);

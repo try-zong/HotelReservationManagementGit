@@ -5,23 +5,30 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>login</title> 
     <link rel = "stylesheet" type="text/css"  th:href="@{/css/login.css}" />
+    <script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/layer-v2.4/layer-v2.4/layer/layer.js"></script>
+<script src="/js/demo.js"></script>
+
+
    
 </head> 
 
 <body> 
+
  <div class="container">
         <div class="login-wrapper">
         <form th:action="@{/toLogin}" method="post" th:object="${User}"> 
             <div class="header">Login</div>
             <div class="form-wrapper">
-                <input type="text" th:field="*{account}"  placeholder="请输入用户名" class="input-item"/>
-                <input type="password" th:field="*{password}" placeholder="请输入密码" class="input-item"/>
+                <input type="text" th:field="*{account}"  placeholder="请输入用户名" id="InputUsername" class="input-item"/>
+                <input type="password" th:field="*{password}" placeholder="请输入密码" id="InputUserPwd" class="input-item"/>
+                
                 <div>
-                <input type="submit" name="Submit" value="登录" class="btn"/>
+                <input onClick="checkForm()" type="submit" name="Submit" value="登录" class="btn" />
             	<input type="reset" name="Reset" value="重置" class="btn"/>
                 </div>
             </div>
-            <div>
+            	<div>
                 <a th:href="@{/magLogin}" class="btn1">管理员登录</a>
                 </div>
             <div class="msg">
@@ -30,5 +37,26 @@
             </form>
         </div>
     </div>
+    <script>
+    function checkForm() {
+        var username = document.getElementById("InputUsername").value;
+        var password = document.getElementById("InputUserPwd").value;
+        
+        if (username.trim() === "" || password.trim() === "") {
+            alert("用户名和密码不能为空！");
+        } else {
+            // 进行表单提交或其他操作
+            // ...
+        }
+        var mistake = /*[[${mistake}]]*/ '';
+        
+        if (mistake != NULL) {
+            alert('用户名或密码错误！');
+            
+        }
+        
+    }
+    
+</script>
 </body>
 </html>

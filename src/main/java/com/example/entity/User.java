@@ -10,6 +10,12 @@ public class User implements Serializable{
 	private Integer  age;
 	private String name;  
 	private String scale;
+	public String getScale() {
+		return scale;
+	}
+	public void setScale(String scale) {
+		this.scale = scale;
+	}
 	private String img;  
 	private String password;
 	public String getAccount() {

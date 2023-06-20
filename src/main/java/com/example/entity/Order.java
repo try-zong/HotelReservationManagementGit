@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class Order {
-	private int id;
+	private Integer id;
 	private double money;  
 	private double in_time;  
 	private double out_time;  
@@ -42,10 +42,11 @@ public class Order {
 	private LocalDateTime deletedAt;//删除订单的时间
 	private Room room;
 	private User user;
-	public int getId() {
+	
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public double getMoney() {
