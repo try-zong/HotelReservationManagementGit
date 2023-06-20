@@ -6,6 +6,7 @@
     <script type="text/javascript" src="${pageContext.request.contextPath }/js/echarts.min.js"></script>
 	<script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
  	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ 	<link rel="stylesheet" type="text/css" href="css/order.css">
  	<style>
         #chartsContainer {
             display: flex;
@@ -24,9 +25,45 @@
     </style>
 </head> 
 <body>
+<div class="tab-bar">
+<ul class="menu">
+        <li>
+            <a href="/show">
+                <i class="el-icon-house"></i>
+                <span>网站概览</span>
+            </a>
+        </li>
+        <li>
+            <a href="/main">
+                <i class="el-icon-user"></i>
+                <span>房间信息</span>
+            </a>
+        </li>
+        <li>
+           <a href="/manageOrder">
+                <i class="el-icon-s-management"></i>
+                <span>查看订单</span>
+            </a>   
+        </li>
+        <li>
+            <a href="/recover">
+                <i class="el-icon-message"></i>
+                <span>回收站</span>
+            </a>
+        </li>
+        <li>
+        	<a href="/userMag">
+            <span>
+                <i class="el-icon-s-tools"></i>
+                <span>个人信息</span>
+            </span>
+            </a>
+        </li>
+    </ul>
+</div>
     <div id="chartsContainer">
         <div class="chartContainer">
-            <h6>最热门的房间</h2>
+            <h6>最热门的房间</h6>
             <canvas id="barChart" class="chartCanvas"></canvas>
         </div>
 

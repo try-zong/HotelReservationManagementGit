@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.RoomMapper">
+    <select id="getOne"  resultType="Room" parameterType="Integer" > 
+    	select * from Room where id=#{id}
+    </select >
+    <select id="selectAllRoomByPage"  parameterType="PageInfo" resultType="Room"> 
+    	select * from Room limit #{offset},#{rows}
+	</select >
+	<!--分类查询所属新闻类别的数量-->
+	<select id="selectRoomByTypes"  resultType="Room" > 
+    	select * from Room 	
+    	<where>
+    		<if test="types!=null">
+    			and types=#{types} 
+    		</if>
+    	</where>
+    		limit #{offset},#{rows}
+    </select >
+    <update id="updateRoomById"  parameterType="Room" >
+		update Room set id=#{id},state=#{state},info=#{info} ,types=#{types},comment=#{comment},price=#{price} 
+		where id=#{id}
+	</update>
+	<select id="selectRoomCount"  resultType="Integer" > 
+    	select count(*) from Room
+    </select >
+    <update id="updateRoomStateById"  parameterType="Room" >
+		update Room set state="不可租",version=#{version}+1
+		where id=#{id} and version = #{version}
+	</update>
+	<update id="saveEdit"  parameterType="Room" >
+		update Room set id=#{id},state=#{state},info=#{info} ,types=#{types},comment=#{comment},price=#{price}
+		,img=#{img} 
+		where id=#{id}
+	</update>
+</mapper> 

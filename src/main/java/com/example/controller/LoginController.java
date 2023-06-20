@@ -34,16 +34,16 @@ public class LoginController {
 		String accountLog = userLog.getAccount();
 		String passwordLog  = userLog.getPassword();
 		User user = userService.findUserByAccountAndpwd(accountLog, passwordLog);
-		log.info("密码"+passwordLog);
-		log.info("菜单"+String.valueOf(menuService.selectMenuByParentId(0)));
+		///log.info("密码"+passwordLog);
+	//	log.info("菜单"+String.valueOf(menuService.selectMenuByParentId(0)));
 		if(user != null) {
 			//登录的用户信息存入session并跳转主页面
 			session.setAttribute("User",user);
 			//生成树形菜单并存入session
 			
 			session.setAttribute("Menu",menuService.selectMenuByParentId(0));
-			log.info(String.valueOf(menuService.selectMenuByParentId(0)));
-			return "redirect:/main";
+		//	log.info(String.valueOf(menuService.selectMenuByParentId(0)));
+			return "redirect:/show";
 		}else {
 			//登录失败，跳回登录页面
 			model.addAttribute("User",userLog);
@@ -68,7 +68,7 @@ public class LoginController {
 			session.setAttribute("Mag",managerLog);
 			//生成树形菜单并存入session
 			session.setAttribute("Menu",menuService.selectMenuByParentId(0));
-			log.info(String.valueOf(menuService.selectMenuByParentId(0)));
+		//	log.info(String.valueOf(menuService.selectMenuByParentId(0)));
 			return "redirect:/magRoom";
 		}else {
 			//登录失败，跳回登录页面

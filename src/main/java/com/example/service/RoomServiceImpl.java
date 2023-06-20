@@ -77,10 +77,10 @@ public class RoomServiceImpl implements RoomService {
             String fileName = UUID.randomUUID().toString() + suffix;
             // 图片存储路径
             String filePath = Constants.IMG_PATH + fileName;
-            log.info("路径"+filePath);
+     //       log.info("路径"+filePath);
             File saveFile = new File(filePath);
             try {
-            	log.info("房间号1"+String.valueOf(room.getId()));
+        //    	log.info("房间号1"+String.valueOf(room.getId()));
                 // 将上传的文件保存到服务器文件系统
                 file.transferTo(saveFile);
                 // 记录服务器文件系统图片名称
@@ -127,10 +127,10 @@ public class RoomServiceImpl implements RoomService {
             String fileName = UUID.randomUUID().toString() + suffix;
             // 图片存储路径
             String filePath = Constants.IMG_PATH + fileName;
-            log.info("路径"+filePath);
+     //       log.info("路径"+filePath);
             File saveFile = new File(filePath);
             try {
-            	log.info("房间号1"+String.valueOf(room.getId()));
+         //   	log.info("房间号1"+String.valueOf(room.getId()));
                 // 将上传的文件保存到服务器文件系统
                 file.transferTo(saveFile);
                 // 记录服务器文件系统图片名称

@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.entity.Hot;
 import com.example.entity.Order;
 import com.example.entity.PageInfo;
 import com.example.entity.Room;
@@ -17,6 +18,7 @@ import com.example.entity.User;
 import com.example.service.OrderService;
 import com.example.service.PageService;
 import com.example.service.RoomService;
+import com.example.service.ShowService;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +32,8 @@ public class OrderController {
 	private OrderService orderService;
 	@Autowired//自动装配的注解     
 	private RoomService roomService;
+	@Autowired
+	private ShowService showService;
 	//进行房间的预订，生成订单
 	@RequestMapping("/reservation")
 	public String reservation(Integer id,
@@ -50,7 +54,7 @@ public class OrderController {
 	@RequestMapping("/toReservation")
 	public String toReservation(@ModelAttribute("order") Order order,
 			HttpSession session, Model model){
-		log.info(String.valueOf(order.getRoom().getId())+"前"+String.valueOf(order.getRoom().getVersion()));
+	//	log.info(String.valueOf(order.getRoom().getId())+"前"+String.valueOf(order.getRoom().getVersion()));
 		//提取用户信息
 		User user = (User)session.getAttribute("User");
 		order.setUser(user);
@@ -78,7 +82,10 @@ public class OrderController {
 		List<Order> orderList = new ArrayList<Order>();
 		orderList =orderService.selectOrderByUserAccountAndPage(user.getAccount(), page);
 		totalcount =orderService.selectOrderCountByUserAccountAndPage(user.getAccount());
-		log.info("totalcount="+ totalcount);
+		//log.info("totalcount="+ totalcount);		
+	//	List<Hot> topThree = new ArrayList<Hot>();			
+		//topThree = showService.selectTopThreeRoom();
+	//	model.addAttribute("topThree",topThree);		
 		int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;	
 		model.addAttribute("orderList",orderList);
 		model.addAttribute("AllOrder", allOrder);
@@ -87,6 +94,7 @@ public class OrderController {
 		model.addAttribute("pageCur",page.getPageCur());
 		return "manageOrder";
 	}
+	
 	@RequestMapping("/findingOrder")
 	public String tofind( Integer totalcount, Integer pageCur, 
 			Model model,@ModelAttribute Order orderFid,HttpSession session) {
@@ -123,7 +131,8 @@ public class OrderController {
 	//修改订单状态
 	@RequestMapping("/updateOrderState")//将请求映射为下列方法的注解
 	public String updateOrderState(Integer id,Integer totalcount,Model model) {
-		orderService.updateOrderStateById(id);	
+		orderService.updateOrderStateById(id);
+		roomService.updateRoomStateTureById(orderService.selectRoomIdById(id));
 		model.addAttribute("totalcount",totalcount);
 		return "forward:manageOrder";
 	}

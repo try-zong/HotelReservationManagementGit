@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+</head>
+<body>
+<div id="jsonDataContainer"></div>
+	<form th:action="@{/finding}" method="post" th:object="${Room}"> 
+		<h2>房间检索</h2>
+		房间号：<input  type="text" th:field="*{id}" placeholder="请输入房间号" ><br> 
+		房间类型：<select th:field="*{types}">
+            <option value="标间">标间</option>
+            <option value="双人房">双人房</option>
+            <option value="总统套房">总统套房</option>
+        </select>
+		<input  type = "submit" name="Submit" value = "查询"  />
+		<input  type = "reset"  name="Reset"  value = "重置" />
+	</form>
+        <table> 
+			<thead >
+				<th><div style="text-align:center;">房间号</div></th>
+				<th><div style="text-align:center;">房间类型</div></th>
+				<th><div style="text-align:center;">价格</div></th>
+				<th><div style="text-align:center;">状态</div></th>
+				<th><div style="text-align:center;">评分</div></th>
+			</thead>
+				<tr th:each="room:${roomList}">
+					<!-- 循环-->       
+					<td><a th:text="${room.id}" ></a></td>    
+	    			<td><a th:text="${room.types}"></a></td>
+	    			<td><a th:text="${room.price}"></a></td>
+	    			<td><a th:text="${room.state}"></a></td>
+	   				<td><a th:text="${room.comment}"></a>
+	   				<a th:href="@{reservation(id=${room.id})}" th:if="${room.state}==可租">预订</a></td>  
+				</tr> 
+		<tr>
+		<td >
+			<li><a>共<span th:text="${totalcount}"></span>条记录</a></li>
+			<li><a>共<span th:text="${totalpage}"></span>页</a></li>
+			<li><a>第<span th:text="${pageCur}"></span>页</a></li>
+			<li><a th:href="@{main(totalcount=${totalcount},pageCur=${pageCur}-1)}" th:if="${pageCur!=1}">上一页</a></li>
+			<li><a th:href="@{main(totalcount=${totalcount},pageCur=${pageCur}+1)}" th:if="${pageCur<totalpage}">下一页</a></li>
+		</td>
+		</tr>
+        </table>
+
+</body>
+</html>

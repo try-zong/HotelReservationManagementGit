@@ -61,7 +61,7 @@ public class UserController {
 			List<User> userList = new ArrayList<User>();
 			userList =userService.findAll(page);
 			totalcount =userService.selectUserCount();
-			log.info("totalcount="+ totalcount);
+		//	log.info("totalcount="+ totalcount);
 			int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;	
 			model.addAttribute("totalcount",totalcount);
 			model.addAttribute("userList",userList);

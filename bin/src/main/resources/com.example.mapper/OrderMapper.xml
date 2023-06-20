@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.OrderMapper">
+	<!--插入订单，主键自增-->
+	<insert id="addOrder" parameterType="Order" keyProperty="id" useGeneratedKeys="true">
+   		insert into `order` (money,in_time,out_time,state,types,phone,room_id,user_account2) values(#{money},#{in_time},#{out_time},"进行中",#{types},#{phone},#{room.id},#{user.account})
+	</insert>
+	<!--通过订单号查询订单关联的房间-->
+	<select id="selectRoomIdById"  resultType="Integer" parameterType="Integer" > 
+    	select room_id from `Order` where id=#{id}
+    </select >
+	<!--根据订单号获取一个订单-->
+    <select id="getOne"  resultType="Order" parameterType="Integer" > 
+    	select * from `Order` where id=#{id}
+    </select >
+    <!--获取所有订单-->
+    <select id="selectAllOrderByPage"  parameterType="PageInfo" resultType="Order"> 
+    	select * from `Order` limit #{offset},#{rows}
+	</select >
+	<!--根据用户名字查询所有订单-->
+	<select id="selectOrderByUserAccountAndPage"  resultType="Order" > 
+    	select * from `Order` 	
+    	<where>
+    		<if test="account!=null">
+    			and user_account2=#{account} 
+    		</if>
+    	</where>
+    		limit #{offset},#{rows}
+    </select >
+    <!--根据订单类型获取订单-->
+    <select id="selectOrderByUserAccountAndTypesAndPage"  resultType="Order" > 
+    	select * from `Order` 	
+    	<where>
+    		<if test="account!=null">
+    			and user_account2=#{account} and types=#{types}
+    		</if>
+    	</where>
+    		limit #{offset},#{rows}
+    </select >
+    <!--获取某用户订单数量-->
+	<select id="selectOrderCountByUserAccountAndPage"  resultType="Integer" > 
+    	select count(*) from `Order` where  user_account2=#{account} 
+    </select >
+        <!--获取订单数量-->
+	<select id="selectOrderCount"  resultType="Integer" > 
+    	select count(*) from `Order`
+    </select >
+</mapper> 

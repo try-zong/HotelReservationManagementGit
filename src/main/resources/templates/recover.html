@@ -3,11 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>recoverOrder</title>
+    <link rel="stylesheet" type="text/css" href="css/order.css">
 </head>
 <body>
+<div class="tab-bar">
+<ul class="menu">
+        <li>
+            <a href="/show">
+                <i class="el-icon-house"></i>
+                <span>网站概览</span>
+            </a>
+        </li>
+        <li>
+            <a href="/main">
+                <i class="el-icon-user"></i>
+                <span>房间信息</span>
+            </a>
+        </li>
+        <li>
+           <a href="/manageOrder">
+                <i class="el-icon-s-management"></i>
+                <span>查看订单</span>
+            </a>   
+        </li>
+        <li>
+            <a href="/recover">
+                <i class="el-icon-message"></i>
+                <span>回收站</span>
+            </a>
+        </li>
+        <li>
+        	<a href="/userMag">
+            <span>
+                <i class="el-icon-s-tools"></i>
+                <span>个人信息</span>
+            </span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div>
 	<form th:action="@{/findingOrder}" method="post" th:object="${AllOrder}"> 
 		<h2>订单检索</h2>
-		订单号：<input  type="text" th:field="*{id}" placeholder="请输入订单号" ><br> 
+		<input  type="text" th:field="*{id}" placeholder="请输入订单号" ><br> 
 		房间类型：<select th:field="*{types}">
             <option value="标间">标间</option>
             <option value="双人房">双人房</option>
@@ -67,5 +106,6 @@
             deleteTime.textContent = remainingDays + ' 天';
         });
 </script>
+</div>
 </body>
 </html>

@@ -14,9 +14,9 @@ public class PageServiceImpl implements PageService{
 		// TODO Auto-generated method stub
 		PageInfo  page = new PageInfo();
 		page.setRows(5);
-		log.info("接口1PageCur="+ pageCur);
+	//	log.info("接口1PageCur="+ pageCur);
 		if (pageCur == null){
-			log.info("接口2PageCur="+ pageCur);
+	//		log.info("接口2PageCur="+ pageCur);
 			pageCur = 1;
 			page.setPageCur(pageCur);
 		}else	page.setPageCur(pageCur);

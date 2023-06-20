@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.entity.Hot;
 import com.example.entity.PageInfo;
 import com.example.entity.Room;
 import com.example.service.PageService;
 import com.example.service.RoomService;
+import com.example.service.ShowService;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +31,8 @@ public class RoomInfoController {
 	private RoomService roomService;
 	@Autowired//自动装配的注解     
 	private PageService pageService;
+	@Autowired
+	private ShowService showService;
 	
 	@RequestMapping("/main")//将请求映射为下列方法的注解     
 	public String toMain(Integer totalcount, Integer pageCur,
@@ -39,8 +43,14 @@ public class RoomInfoController {
 		List<Room> roomList =roomService.selectAllRoomByPage(page);
 		int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;
 		Room roomnew = new Room();
-		log.info("totalpag="+String.valueOf(totalpage));
-		log.info("PageCur="+String.valueOf(page.getPageCur()));
+	//	log.info("totalpag="+String.valueOf(totalpage));
+	//	log.info("PageCur="+String.valueOf(page.getPageCur()));
+		
+		List<Hot> topThree = new ArrayList<Hot>();	
+		topThree = showService.selectTopThreeRoom();
+		model.addAttribute("topThree",topThree);
+	
+		
 		model.addAttribute("Room", roomnew);		
 		model.addAttribute("roomList",roomList);
 		model.addAttribute("totalcount",totalcount);
@@ -136,20 +146,21 @@ public class RoomInfoController {
 	public String toEditRoomInfo(@ModelAttribute("Room") Room room,
 			@RequestParam("file") MultipartFile file,
 			HttpSession session, Model model){
-		log.info("价格"+String.valueOf(room.getPrice()));
+		//log.info("价格"+String.valueOf(room.getPrice()));
 		if(roomService.saveEdit(room, file))
-		log.info("该方法执行了");
-		log.info("房间号"+String.valueOf(room.getId()));
+	//	log.info("该方法执行了");
+	//	log.info("房间号"+String.valueOf(room.getId()));
         //model.addAttribute("user", user);
         return "redirect:/magRoom";
+		return "redirect:/magRoom";
         
 	}
 	//删除房间
 	@RequestMapping("/deleteRoom")     
 	public String deleteRoom(Integer id,Integer totalcount,Model model){
-		log.info("1"+String.valueOf(totalcount));
+	//	log.info("1"+String.valueOf(totalcount));
 		if(roomService.deleteRoom(id)>0) {
-			log.info("2"+String.valueOf(totalcount));
+	//		log.info("2"+String.valueOf(totalcount));
 			model.addAttribute("totalcount",totalcount--);
 			return "forward:magRoom"; 
 		}else {
@@ -168,7 +179,7 @@ public class RoomInfoController {
 	public String toAddRoom(@ModelAttribute("Room") Room room,
 			@RequestParam("file") MultipartFile file,
 			HttpSession session, Model model){
-		log.info("file"+String.valueOf(file));
+	//	log.info("file"+String.valueOf(file));
 		if(roomService.addRoom(room, file)>0) {
 			//model.addAttribute("user", user);
 			return "redirect:/magRoom";

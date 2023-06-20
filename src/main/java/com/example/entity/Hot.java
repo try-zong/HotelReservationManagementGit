@@ -10,4 +10,25 @@ public class Hot implements Serializable{
 	private String name;
 	private double scale;
 	private int num;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public double getScale() {
+		return scale;
+	}
+	public void setScale(double scale) {
+		this.scale = scale;
+	}
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 }

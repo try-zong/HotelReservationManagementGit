@@ -6,13 +6,20 @@
     <link rel = "stylesheet" type="text/css"  th:href="@{/css/login.css}" />
 </head> 
 <body> 
-<form th:action="@{/toMagLogin}" method="post" th:object="${Mag}"> 
-	<h2>用户登录</h2>
-    用户名：<input  type="text" th:field="*{id}" placeholder="请输入账号" ><br> 
-    密&emsp;码： <input  type="password" th:field="*{password}" placeholder="请输入密码" ><br> 
-	<input  type = "submit" name="Submit" value = "登录"  />
-	<input  type = "reset"  name="Reset"  value = "重置" />
-</form>
-
+<div class="container">
+	<div class="login-wrapper">
+		<form th:action="@{/toMagLogin}" method="post" th:object="${Mag}"> 
+			<div class="header">管理员登录</div>
+			<div class="form-wrapper">
+ 				<input  type="text" th:field="*{id}" placeholder="请输入账号" class="input-item"/> 
+    			<input  type="password" th:field="*{password}" placeholder="请输入密码" class="input-item"/>
+				<div>
+				<input  type = "submit" name="Submit" value = "登录" class="btn"/>
+				<input  type = "reset"  name="Reset"  value = "重置" class="btn"/>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
 </body> 
 </html>

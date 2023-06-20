@@ -1,32 +1,74 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>EditRoomInfo</title>
+  <meta charset="UTF-8">
+  <title>User Info Management</title>
+  <link rel="stylesheet" type="text/css" href="css/order.css">
 </head>
+
 <body>
-	<form th:action="@{/userInfoMag}" method="post" th:object="${User}" enctype="multipart/form-data"> 
-       <table>
-    	<tr>
-    		<td >账号名</td>
-    		<td><input contenteditable="true" type="text" th:field="*{account}"></td>
-   			<td >年龄</td>
-   			<td><input contenteditable="true" type="text" th:field="*{age}"></td>
-    	</tr>
-    	<tr>
-			<td >姓名</td>
-			<td><input contenteditable="true" type="text" th:field="*{name}"></td>
-    	</tr>
-    	<tr>
-			<td><input type="file" name="file"/></td>
-			<img th:src="*{img}" style="width:100px; height: 100px;"/>
-    	</tr>
-		<tr>
-			<td><button type = "submit" th:text="确认修改" /></button></td>
-			<td><input type = "reset" value = "重置" /></td>
-		    <td>取消</td>
-		</tr>
-	  </table>	
-	</form>
+<div class="tab-bar">
+<ul class="menu">
+        <li>
+            <a href="/show">
+                <i class="el-icon-house"></i>
+                <span>网站概览</span>
+            </a>
+        </li>
+        <li>
+            <a href="/main">
+                <i class="el-icon-user"></i>
+                <span>房间信息</span>
+            </a>
+        </li>
+        <li>
+           <a href="/manageOrder">
+                <i class="el-icon-s-management"></i>
+                <span>查看订单</span>
+            </a>   
+        </li>
+        <li>
+            <a href="/recover">
+                <i class="el-icon-message"></i>
+                <span>回收站</span>
+            </a>
+        </li>
+        <li>
+        	<a href="/userMag">
+            <span>
+                <i class="el-icon-s-tools"></i>
+                <span>个人信息</span>
+            </span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="container">
+
+  <form th:action="@{/userInfoMag}" method="post" th:object="${User}" enctype="multipart/form-data">
+    <table>
+      <tr>
+        <td>账号名</td>
+        <td><input contenteditable="true" type="text" th:field="*{account}"></td>
+        <td>年龄</td>
+        <td><input contenteditable="true" type="text" th:field="*{age}"></td>
+      </tr>
+      <tr>
+        <td>姓名</td>
+        <td><input contenteditable="true" type="text" th:field="*{name}"></td>
+      </tr>
+      <tr>
+        <td><input type="file" name="file" /></td>
+        <td><img th:src="*{img}" /></td>
+      </tr>
+      <tr>
+        <td><button type="submit" th:text="确认修改"></button></td>
+        <td><input type="reset" value="重置" /></td>
+        <td>取消</td>
+      </tr>
+    </table>
+  </form>
+</div>
 </body>
 </html>

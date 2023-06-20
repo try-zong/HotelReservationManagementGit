@@ -1,41 +1,76 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>EditRoomInfo</title>
+    <title>Tree Menu Example</title>
+    <style>
+        /* 添加样式代码 */
+        .menu {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu li {
+            padding: 10px;
+        }
+
+        .menu li a {
+            text-decoration: none;
+        }
+
+        .menu li ul {
+            display: none;
+            margin-left: 10px;
+            list-style-type: none;
+        }
+
+        .menu li:hover > ul {
+            display: block;
+        }
+    </style>
 </head>
 <body>
-	<form th:action="@{/toEditRoomInfo}" method="post" th:object="${Room}" enctype="multipart/form-data"> 
-       <table>
-    	<tr>
-    		<td >房号</td>
-    		<td><input contenteditable="true" type="text" th:field="*{id}"></td>
-   			<td >房间类型</td>
-   			<td><input contenteditable="true" type="text" th:field="*{types}"></td>
-    	</tr>
-    	<tr>
-			<td >房间信息</td>
-			<td><input contenteditable="true" type="text" th:field="*{info}"></td>
-			<td >价格</td>
-			<td><input contenteditable="true" type="text" th:field="*{price}"></td> 
-    	</tr>
-    	<tr>
-			<td>状态</td>
-			<td><textarea th:field="*{state}" ></textarea></td>
-			<td><input type="file" name="file"/></td>
-			
-			<!--
-			<input type="hidden" id="img_url" name="pro_imgurl" value="" />
-			<td >样图</td>
-   			<td><p th:text="*{money}"></p></td>
-   			-->
-    	</tr>
-		<tr>
-			<td><button type = "submit" th:text="确认修改" /></button></td>
-			<td><input type = "reset" value = "重置" /></td>
-		    <td>取消</td>
-		</tr>
-	  </table>	
-	</form>
+    <ul class="menu">
+        <li>
+            <a href="/index">
+                <i class="el-icon-house"></i>
+                <span>网站概览</span>
+            </a>
+        </li>
+        <li>
+            <a href="/usermanage">
+                <i class="el-icon-user"></i>
+                <span>房间状态</span>
+            </a>
+        </li>
+        <li>
+            <span>
+                <i class="el-icon-s-management"></i>
+                <span>酒店管理</span>
+            </span>
+            <ul>
+                <li><a href="/fieldmanage">房间类型管理</a></li>
+                <li><a href="/subjectmanage">房间价格管理</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="/noticemanage">
+                <i class="el-icon-message"></i>
+                <span>订单管理</span>
+            </a>
+        </li>
+        <li>
+            <span>
+                <i class="el-icon-s-tools"></i>
+                <span>系统管理</span>
+            </span>
+            <ul>
+                <li><a href="/rolemanage">角色管理</a></li>
+                <li><a href="/spidertask">爬虫任务</a></li>
+                <li><a href="/templatemanage">爬虫模板</a></li>
+            </ul>
+        </li>
+    </ul>
 </body>
 </html>

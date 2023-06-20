@@ -1,0 +1,32 @@
+
+server:
+ servlet:
+    context-path: /
+# 配置数据源
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/hotel_reservation?characterEncoding=utf8&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+
+  jackson:
+    serialization:
+      indent-output: true
+  thymeleaf:
+    cache: false
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+mybatis:
+  configuration:
+    use-column-label: true
+    lazy-loading-enabled: true
+  type-aliases-package: "com.example.entity"
+  mapper-locations: "classpath:com.example.mapper/*.xml"
+
+logging:
+  level:
+    com.example.repository: debug
+

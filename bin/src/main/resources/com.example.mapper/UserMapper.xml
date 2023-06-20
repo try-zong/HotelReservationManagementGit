@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.UserMapper">
+	<select id="findAll" resultType="User">
+		select * from user
+	</select>
+	<select id="getOne"  resultType="User" > 
+    	select * from user where account=#{account}
+    </select > 
+    <select id="findUserByAccountAndpwd"  resultType="User" > 
+    	select * from user where account=#{account} and password=#{password}
+    </select > 
+    <insert id="addUser" parameterType="User" >
+    	insert into user(account,password,age,name) values(#{account},#{password},#{age},#{name})
+    </insert>
+    <delete id="deleteUser" >
+    	delete from user where account=#{account}
+    </delete>
+    <update id="saveUser"  parameterType="User" >
+		update User set account=#{account},age=#{age},name=#{name},img=#{img} 
+		where account=#{account}
+	</update>
+    
+    <!--管理员语句-->
+    <select id="findManagerByIdAndpwd"  resultType="Manager" > 
+    	select * from manager where id=#{id} and password=#{password}
+    </select > 
+</mapper> 

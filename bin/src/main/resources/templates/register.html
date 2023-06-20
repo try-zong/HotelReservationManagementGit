@@ -1,0 +1,28 @@
+<!DOCTYPE html> 
+<html lang="en" xmlns:th="https://www.thymeleaf.org"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <title>register</title> 
+    <link rel = "stylesheet" type="text/css"  th:href="@{/css/login.css}" />
+</head> 
+    <meta charset="UTF-8">
+    <title>register_account</title>
+</head>
+<body>
+	<form th:action="@{/addUser}" th:object="${User}" method="post" >
+		<div class='span'><span>账户名:</span></div>
+			<input type="text" th:field="*{account}" placeholder='电话/邮箱/用户名'  />
+		</div>
+		<div class='span'><span>密码:</span></div>
+		<input type="password" th:field="*{password}" placeholder='请输入密码' />
+		<div class='span'><span>年龄:</span></div>
+		<input type="text" th:field="*{age}" placeholder='请输入年龄'/>
+		</div><div class='span'><span>姓名:</span></div>
+		<input type="text" th:field="*{name}" placeholder='姓名' />
+		</div>
+	<input class="but1" type="submit" value="注册" >
+    <input class="but2" type="reset" value="清空">
+	</form>
+</body>
+</html>
+
