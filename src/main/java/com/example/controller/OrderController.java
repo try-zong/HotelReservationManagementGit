@@ -109,13 +109,17 @@ public class OrderController {
 		}else {
 			orderList =orderService.selectOrderByUserAccountAndPage(user.getAccount(), page);
 		}
-		totalcount =orderList.size();
-		int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;	
-		model.addAttribute("orderList",orderList);
-		model.addAttribute("AllOrder", ordernew);
-		model.addAttribute("totalcount",totalcount);
-		model.addAttribute("totalpage",totalpage);
-		model.addAttribute("pageCur",page.getPageCur());
+		 totalcount=orderList.size();
+		if(totalcount == 0) {
+			model.addAttribute("mistake", "订单不存在");
+		}else {
+			int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;	
+			model.addAttribute("orderList",orderList);
+			model.addAttribute("AllOrder", ordernew);
+			model.addAttribute("totalcount",totalcount);
+			model.addAttribute("totalpage",totalpage);
+			model.addAttribute("pageCur",page.getPageCur());
+		}
 		return "/manageOrder";
 	}
 	//删除订单控制

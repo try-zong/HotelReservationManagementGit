@@ -1,6 +1,7 @@
 package com.example.controller;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class UserController {
 		User user = (User)session.getAttribute("User");
 		User userInfo = userService.getOne(user.getAccount());
 		model.addAttribute("User",userInfo);
-		return "userInfoShow"; 
+		return "userInfoMag"; 
 	}
 	
 		@RequestMapping("/userInfoMag")
@@ -56,7 +57,8 @@ public class UserController {
 			}else {
 				model.addAttribute("mistake", "修改失败");
 				return "redirect:/main";
-			}        
+			}  
+		
 		}
 
 		
