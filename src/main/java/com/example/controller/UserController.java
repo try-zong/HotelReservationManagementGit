@@ -42,7 +42,7 @@ public class UserController {
 		User user = (User)session.getAttribute("User");
 		User userInfo = userService.getOne(user.getAccount());
 		model.addAttribute("User",userInfo);
-		return "userInfoMag"; 
+		return "userInfoShow"; 
 	}
 	
 		@RequestMapping("/userInfoMag")

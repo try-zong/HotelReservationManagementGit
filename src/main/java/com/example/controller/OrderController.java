@@ -32,8 +32,7 @@ public class OrderController {
 	private OrderService orderService;
 	@Autowired//自动装配的注解     
 	private RoomService roomService;
-	@Autowired
-	private ShowService showService;
+
 	//进行房间的预订，生成订单
 	@RequestMapping("/reservation")
 	public String reservation(Integer id,
@@ -43,8 +42,6 @@ public class OrderController {
 		//生成订单
 		Order order = new Order();
 		order.setRoom(room);
-		//order.setUser_account2(user.getAccount());
-		//order.setRoom_id(roomId);
 		order.setTypes(room.getTypes());
 		order.setMoney(room.getPrice());
 		session.setAttribute("room", room);
@@ -54,7 +51,7 @@ public class OrderController {
 	@RequestMapping("/toReservation")
 	public String toReservation(@ModelAttribute("order") Order order,
 			HttpSession session, Model model){
-	//	log.info(String.valueOf(order.getRoom().getId())+"前"+String.valueOf(order.getRoom().getVersion()));
+	    //log.info(String.valueOf(order.getRoom().getId())+"前"+String.valueOf(order.getRoom().getVersion()));
 		//提取用户信息
 		User user = (User)session.getAttribute("User");
 		order.setUser(user);
@@ -63,6 +60,7 @@ public class OrderController {
 		//乐观锁，判断是否有人提前预订
 		int i = roomService.updateRoomStateById(room);
 		if(i == 0) {
+			model.addAttribute("mistake", "预订失败，该时间段已被预订！");
 			return "redirect:/main";
 		}else {
 			//预订成功，返回订单管理页面
@@ -83,9 +81,9 @@ public class OrderController {
 		orderList =orderService.selectOrderByUserAccountAndPage(user.getAccount(), page);
 		totalcount =orderService.selectOrderCountByUserAccountAndPage(user.getAccount());
 		//log.info("totalcount="+ totalcount);		
-	//	List<Hot> topThree = new ArrayList<Hot>();			
+	    //List<Hot> topThree = new ArrayList<Hot>();			
 		//topThree = showService.selectTopThreeRoom();
-	//	model.addAttribute("topThree",topThree);		
+	    //model.addAttribute("topThree",topThree);		
 		int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;	
 		model.addAttribute("orderList",orderList);
 		model.addAttribute("AllOrder", allOrder);

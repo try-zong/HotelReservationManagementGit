@@ -45,7 +45,7 @@
     </select >
         <!--获取订单数量-->
 	<select id="selectOrderCount"  resultType="Integer" > 
-    	select count(*) from `Order` and deleted=0
+    	select count(*) from `Order` where deleted=0
     </select >
     <!--修改订单-->
 	<update id="updateOrderByOrder" parameterType="Order">

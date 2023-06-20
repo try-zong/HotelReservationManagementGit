@@ -21,8 +21,6 @@ import lombok.extern.slf4j.Slf4j;
 public class LoginController {
 	@Autowired
 	private UserService userService;
-	@Autowired
-	private MenuService menuService;
 	@RequestMapping({"/login","/"})
 	public String toLogin( Model model) {
 		User usernew = new User();
@@ -34,18 +32,13 @@ public class LoginController {
 		String accountLog = userLog.getAccount();
 		String passwordLog  = userLog.getPassword();
 		User user = userService.findUserByAccountAndpwd(accountLog, passwordLog);
-		///log.info("密码"+passwordLog);
-	//	log.info("菜单"+String.valueOf(menuService.selectMenuByParentId(0)));
 		if(user != null) {
 			//登录的用户信息存入session并跳转主页面
 			session.setAttribute("User",user);
-			//生成树形菜单并存入session
-			
-			session.setAttribute("Menu",menuService.selectMenuByParentId(0));
-		//	log.info(String.valueOf(menuService.selectMenuByParentId(0)));
 			return "redirect:/show";
 		}else {
 			//登录失败，跳回登录页面
+			model.addAttribute("mistake", "登录失败，用户名或密码错误！");
 			model.addAttribute("User",userLog);
 			return "login";
 		}
@@ -64,14 +57,12 @@ public class LoginController {
 		String passwordLog  = managerLog.getPassword();
 		Manager manager = userService.findManagerByIdAndpwd(idLog, passwordLog);
 		if(manager != null) {
-			//登录的用户信息存入session并跳转主页面
-			session.setAttribute("Mag",managerLog);
-			//生成树形菜单并存入session
-			session.setAttribute("Menu",menuService.selectMenuByParentId(0));
-		//	log.info(String.valueOf(menuService.selectMenuByParentId(0)));
+			//登录的用户信息存入session并跳转主页面	
+			//log.info(String.valueOf(menuService.selectMenuByParentId(0)));
 			return "redirect:/magRoom";
 		}else {
 			//登录失败，跳回登录页面
+			model.addAttribute("mistake", "登录失败，用户名或密码错误！");
 			model.addAttribute("Mag",managerLog);
 			return "maglogin";
 		}

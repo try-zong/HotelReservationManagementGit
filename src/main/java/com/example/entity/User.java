@@ -9,6 +9,7 @@ public class User implements Serializable{
 	private String account;  
 	private Integer  age;
 	private String name;  
+	private String scale;
 	private String img;  
 	private String password;
 	public String getAccount() {

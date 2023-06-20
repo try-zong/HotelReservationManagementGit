@@ -31,7 +31,7 @@ public class RoomInfoController {
 	private RoomService roomService;
 	@Autowired//自动装配的注解     
 	private PageService pageService;
-	@Autowired
+	@Autowired//自动装配的注解     
 	private ShowService showService;
 	
 	@RequestMapping("/main")//将请求映射为下列方法的注解     
@@ -43,14 +43,11 @@ public class RoomInfoController {
 		List<Room> roomList =roomService.selectAllRoomByPage(page);
 		int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;
 		Room roomnew = new Room();
-	//	log.info("totalpag="+String.valueOf(totalpage));
-	//	log.info("PageCur="+String.valueOf(page.getPageCur()));
-		
-		List<Hot> topThree = new ArrayList<Hot>();	
+		log.info("totalpag="+String.valueOf(totalpage));
+		log.info("PageCur="+String.valueOf(page.getPageCur()));
+		List<Hot> topThree = new ArrayList<Hot>();
 		topThree = showService.selectTopThreeRoom();
 		model.addAttribute("topThree",topThree);
-	
-		
 		model.addAttribute("Room", roomnew);		
 		model.addAttribute("roomList",roomList);
 		model.addAttribute("totalcount",totalcount);
@@ -77,7 +74,10 @@ public class RoomInfoController {
 			roomList =roomService.selectAllRoomByPage(page);
 		}
 		totalcount =roomList.size();
-		int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;	
+		int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;
+		List<Hot> topThree = new ArrayList<Hot>();
+		topThree = showService.selectTopThreeRoom();
+		model.addAttribute("topThree",topThree);
 		model.addAttribute("roomList",roomList);
 		model.addAttribute("Room", roomnew);
 		model.addAttribute("totalcount",totalcount);

@@ -16,7 +16,7 @@
     	select * from user where account=#{account} and password=#{password}
     </select > 
     <insert id="addUser" parameterType="User" >
-    	insert into user(account,password,age,name) values(#{account},#{password},#{age},#{name})
+    	insert into user(account,password,age,name,scale) values(#{account},#{password},#{age},#{name},'vip')
     </insert>
     <delete id="deleteUser" >
     	delete from user where account=#{account}
