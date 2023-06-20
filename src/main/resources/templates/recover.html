@@ -59,8 +59,8 @@
             var deleteDate = new Date(deleteTime.getAttribute('data-delete-time'));
             var now = new Date();
 
-            var remainingDays = Math.ceil((now-deleteDate) / (24 * 60 * 60 * 1000));
-            if (remainingDays > 10) {
+            var remainingDays = 10 - Math.ceil((now-deleteDate) / (24 * 60 * 60 * 1000));
+            if (remainingDays < 0) {
                 remainingDays = 0;
             }
 

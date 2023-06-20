@@ -28,7 +28,14 @@ public class UserController {
 	private UserService userService;
 	@Autowired//自动装配的注解     
 	private PageService pageService;
-	
+	//展示用户个人信息
+	@RequestMapping("/userInfoShow")
+	public String userInfoShow(Model model,HttpSession session){
+		User user = (User)session.getAttribute("User");
+		User userInfo = userService.getOne(user.getAccount());
+		model.addAttribute("User",userInfo);
+		return "userInfoShow"; 
+	}
 	//编辑用户信息
 	@RequestMapping("/userMag")//将请求映射为下列方法的注解     
 	public String userMag(Model model,HttpSession session){
@@ -37,8 +44,9 @@ public class UserController {
 		model.addAttribute("User",userInfo);
 		return "userInfoMag"; 
 	}
+	
 		@RequestMapping("/userInfoMag")
-		public String toEditRoomInfo(@ModelAttribute("User") User user,
+		public String userInfoMag(@ModelAttribute("User") User user,
 				@RequestParam("file") MultipartFile file,
 				HttpSession session, Model model){
 			if(userService.saveUser(user, file)>0) {
