@@ -59,12 +59,12 @@ public class RoomInfoController {
 	@RequestMapping("/finding")
 	public String tofind( Integer totalcount, Integer pageCur, Model model,
 			@ModelAttribute Room roomFid) {
-		int id = roomFid.getId();
+		Integer id = roomFid.getId();
 		String types = roomFid.getTypes();
 		List<Room> roomList = new ArrayList<Room>();
 		PageInfo  page = pageService.set(totalcount, pageCur);
 		Room roomnew = new Room();
-		if(id != 0 && types != null) {
+		if(id != null && types != null) {
 			roomList = Arrays.asList(roomService.getOne(id));
 		}else if(types!=null) {
 			roomList = roomService.selectRoomByTypes(types,page);
@@ -110,12 +110,12 @@ public class RoomInfoController {
 	@RequestMapping("/selecting")
 	public String toSelect( Integer totalcount, Integer pageCur, Model model,
 			@ModelAttribute Room roomFid) {
-		int id = roomFid.getId();
+		Integer id = roomFid.getId();
 		String types = roomFid.getTypes();
 		List<Room> roomList = new ArrayList<Room>();
 		PageInfo  page = pageService.set(totalcount, pageCur);
 		Room roomnew = new Room();
-		if(id != 0 && types != null) {
+		if(id != null && types != null) {
 			roomList = Arrays.asList(roomService.getOne(id));
 		}else if(types!=null) {
 			roomList = roomService.selectRoomByTypes(types,page);

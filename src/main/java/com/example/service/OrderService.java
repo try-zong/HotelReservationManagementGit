@@ -21,6 +21,7 @@ public interface OrderService {
 	public List<Order> selectOrderByUserAccountAndTypesAndPage(String account,String types,PageInfo page);
 	public List<Order> selectAllOrderByPage(PageInfo page);	//查询所有订单
 	public List<Order> selectOrderByMoney(double money);	//通过金额查询订单
+	public List<Order> selectOrderByTypes(String types,PageInfo page);	//通过类型查询订单
 	//修改订单状态
     public int  updateOrderStateById(int id);
 	//删除订单

@@ -60,7 +60,6 @@ public class OrderController {
 		//乐观锁，判断是否有人提前预订
 		int i = roomService.updateRoomStateById(room);
 		if(i == 0) {
-			model.addAttribute("mistake", "预订失败，该时间段已被预订！");
 			return "redirect:/main";
 		}else {
 			//预订成功，返回订单管理页面
@@ -104,22 +103,18 @@ public class OrderController {
 		Order ordernew = new Order();
 		if(id != null && types != null) {
 			orderList = Arrays.asList(orderService.getOne(id));
-		}else if(types!=null) {
+		}else if(types!= null) {
 			orderList = orderService.selectOrderByUserAccountAndTypesAndPage(user.getAccount(), types, page);
 		}else {
 			orderList =orderService.selectOrderByUserAccountAndPage(user.getAccount(), page);
 		}
-		 totalcount=orderList.size();
-		if(totalcount == 0) {
-			model.addAttribute("mistake", "订单不存在");
-		}else {
-			int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;	
-			model.addAttribute("orderList",orderList);
-			model.addAttribute("AllOrder", ordernew);
-			model.addAttribute("totalcount",totalcount);
-			model.addAttribute("totalpage",totalpage);
-			model.addAttribute("pageCur",page.getPageCur());
-		}
+		totalcount=orderList.size();
+		int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;	
+		model.addAttribute("orderList",orderList);
+		model.addAttribute("AllOrder", ordernew);
+		model.addAttribute("totalcount",totalcount);
+		model.addAttribute("totalpage",totalpage);
+		model.addAttribute("pageCur",page.getPageCur());
 		return "/manageOrder";
 	}
 	//删除订单控制
@@ -190,5 +185,31 @@ public class OrderController {
 		model.addAttribute("totalpage",totalpage);
 		model.addAttribute("pageCur",page.getPageCur());
 		return "magOrder";
+	}
+	//筛选订单
+	@RequestMapping("/selectOrder")
+	public String toSelect( Integer totalcount, Integer pageCur, 
+			Model model,@ModelAttribute Order orderFid,HttpSession session) {
+		Integer id = orderFid.getId();
+		String types = orderFid.getTypes();
+		List<Order> orderList = new ArrayList<Order>();
+		PageInfo  page = pageService.set(totalcount, pageCur);
+		Order ordernew = new Order();
+		if(id != null && types != null) {
+			orderList = Arrays.asList(orderService.getOne(id));
+		}else if(types != null) {
+			log.info(types);
+			orderList = orderService.selectOrderByTypes(types, page);
+		}else {
+			orderList =orderService.selectAllOrderByPage(page);
+		}
+		totalcount=orderList.size();
+		int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;	
+		model.addAttribute("orderList",orderList);
+		model.addAttribute("AllOrder", ordernew);
+		model.addAttribute("totalcount",totalcount);
+		model.addAttribute("totalpage",totalpage);
+		model.addAttribute("pageCur",page.getPageCur());
+		return "/magOrder";
 	}
 }

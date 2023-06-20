@@ -1,15 +1,21 @@
 package com.example.service;
 
 import java.time.LocalDateTime;
+
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.controller.LoginController;
 import com.example.entity.Order;
 import com.example.entity.PageInfo;
 import com.example.mapper.OrderMapper;
+
+import lombok.extern.slf4j.Slf4j;
 @Service
+@Slf4j
 public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private OrderMapper orderMapper;
@@ -50,6 +56,8 @@ public class OrderServiceImpl implements OrderService {
 		// TODO Auto-generated method stub
 		int rows = page.getRows();
 		int offset = page.getOffset();
+		log.info(String.valueOf(rows));
+		log.info(String.valueOf(offset));
 		return orderMapper.selectOrderByUserAccountAndTypesAndPage(account, types, offset, rows);
 	}
 
@@ -57,6 +65,16 @@ public class OrderServiceImpl implements OrderService {
 	public List<Order> selectAllOrderByPage(PageInfo page) {
 		// TODO Auto-generated method stub
 		return orderMapper.selectAllOrderByPage(page);
+	}
+
+	@Override
+	public List<Order> selectOrderByTypes(String types, PageInfo page) {
+		// TODO Auto-generated method stub
+		int rows = page.getRows();
+		int offset = page.getOffset();
+		log.info(String.valueOf(rows));
+		log.info(String.valueOf(offset));
+		return orderMapper.selectOrderByTypes(types, offset, rows);
 	}
 
 	@Override

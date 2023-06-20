@@ -29,7 +29,7 @@
     	</where>
     		limit #{offset},#{rows}
     </select >
-    <!--根据订单类型获取订单-->
+    <!--根据订单类型和用户名获取订单-->
     <select id="selectOrderByUserAccountAndTypesAndPage"  resultType="Order" > 
     	select * from `Order` 	
     	<where>
@@ -42,6 +42,14 @@
     <!--获取某用户订单数量-->
 	<select id="selectOrderCountByUserAccountAndPage"  resultType="Integer" > 
     	select count(*) from `Order` where  user_account2=#{account} and deleted=0
+    </select >
+     <!--根据订单类型获取订单-->
+    <select id="selectOrderByTypes"  resultType="Order" > 
+    	select * from `Order` 	
+    	<where>
+    	 	and types=#{types} and deleted=0
+    	</where>
+    		limit #{offset},#{rows}
     </select >
         <!--获取订单数量-->
 	<select id="selectOrderCount"  resultType="Integer" > 

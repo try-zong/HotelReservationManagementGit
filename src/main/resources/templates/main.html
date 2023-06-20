@@ -69,6 +69,7 @@
  	<div class="form-container">
         <form th:action="@{/finding}" method="post" th:object="${Room}">
             <h2 class="title">房间检索</h2>
+            <label for="roomType">房间号:</label>
             <input type="text" th:field="*{id}" placeholder="请输入房间号"><br>
             <label for="roomType">房间类型:</label>
             <select id="roomType" th:field="*{types}">

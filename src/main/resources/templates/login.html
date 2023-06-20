@@ -17,7 +17,7 @@
 
  <div class="container">
         <div class="login-wrapper">
-        <form th:action="@{/toLogin}" method="post" th:object="${User}"> 
+        <form th:action="@{/toLogin}" method="post" th:object="${User}" id="logInfo"> 
             <div class="header">Login</div>
             <div class="form-wrapper">
                 <input type="text" th:field="*{account}"  placeholder="请输入用户名" id="InputUsername" class="input-item"/>
@@ -27,6 +27,8 @@
                 <input onClick="checkForm()" type="submit" name="Submit" value="登录" class="btn" />
             	<input type="reset" name="Reset" value="重置" class="btn"/>
                 </div>
+                <div style="text-align:center;"><span th:if="${mistake}"  id="Error" style="color:red;">用户名或者密码输入错误！！
+				<br/>请检查后重新输入！！</span></div>
             </div>
             	<div>
                 <a th:href="@{/magLogin}" class="btn1">管理员登录</a>
@@ -56,7 +58,12 @@
         }
         
     }
-    
+        InputUsername.onfocus = function () {
+ 			document.getElementById("Error").innerHTML = "";
+		};
+		InputUserPwd.onfocus = function () {
+ 			document.getElementById("Error").innerHTML = "";
+		};
 </script>
 </body>
 </html>

@@ -24,6 +24,7 @@ public interface OrderMapper {
 	public List<Order> selectOrderByUserAccountAndTypesAndPage(@Param("account")String account,@Param("types")String types,@Param("offset")int offset,@Param("rows")int rows);
 	public List<Order> selectAllOrderByPage(PageInfo page);	//查询所有订单
 	public List<Order> selectOrderByMoney(double money);	//通过金额查询订单
+	public List<Order> selectOrderByTypes(@Param("types")String types,@Param("offset")int offset,@Param("rows")int rows);	//通过类型查询订单
 	//删除订单
 	@Delete("delete from `Order`  where id=#{id}")
 	public int deleteOrderById(int id);
