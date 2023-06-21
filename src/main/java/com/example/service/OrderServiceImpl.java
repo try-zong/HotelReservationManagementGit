@@ -62,6 +62,13 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	public List<Order> selectDeletedOrderByUserAccountAndTypesAndPage(String account, String types, PageInfo page) {
+		int rows = page.getRows();
+		int offset = page.getOffset();
+		return orderMapper.selectDeletedOrderByUserAccountAndTypesAndPage(account, types, offset, rows);
+	}
+
+	@Override
 	public List<Order> selectAllOrderByPage(PageInfo page) {
 		// TODO Auto-generated method stub
 		return orderMapper.selectAllOrderByPage(page);

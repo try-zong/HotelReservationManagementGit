@@ -19,6 +19,8 @@ public interface OrderService {
 	public int selectOrderCount();
 	//通过用户名和类型查询订单
 	public List<Order> selectOrderByUserAccountAndTypesAndPage(String account,String types,PageInfo page);
+	//通过用户名和类型查询已删除订单
+	public List<Order> selectDeletedOrderByUserAccountAndTypesAndPage(String account,String types,PageInfo page);
 	public List<Order> selectAllOrderByPage(PageInfo page);	//查询所有订单
 	public List<Order> selectOrderByMoney(double money);	//通过金额查询订单
 	public List<Order> selectOrderByTypes(String types,PageInfo page);	//通过类型查询订单

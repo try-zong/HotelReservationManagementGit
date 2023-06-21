@@ -45,7 +45,7 @@
 
 <div class="container">
 	 <div class="form-container">
-		<form th:action="@{/findingOrder}" method="post" th:object="${AllOrder}"> 
+		<form th:action="@{/findingDeletedOrder}" method="post" th:object="${AllOrder}"> 
 			<h2 class="title">订单检索</h2>
 			房间号:<input  type="text" th:field="*{id}" placeholder="请输入订单号" ><br> 
 			<label for="roomType">房间类型:</label>

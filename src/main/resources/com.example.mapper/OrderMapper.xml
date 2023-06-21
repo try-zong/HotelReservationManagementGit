@@ -39,6 +39,16 @@
     	</where>
     		limit #{offset},#{rows}
     </select >
+       <!--通过用户名和类型查询已删除订单-->
+    <select id="selectDeletedOrderByUserAccountAndTypesAndPage"  resultType="Order" > 
+    	select * from `Order` 	
+    	<where>
+    		<if test="account!=null">
+    			and user_account2=#{account} and types=#{types} and deleted=1
+    		</if>
+    	</where>
+    		limit #{offset},#{rows}
+    </select >
     <!--获取某用户订单数量-->
 	<select id="selectOrderCountByUserAccountAndPage"  resultType="Integer" > 
     	select count(*) from `Order` where  user_account2=#{account} and deleted=0

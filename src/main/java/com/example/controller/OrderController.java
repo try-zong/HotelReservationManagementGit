@@ -151,6 +151,31 @@ public class OrderController {
 		model.addAttribute("pageCur",page.getPageCur());
 		return "recover";
 	}
+	@RequestMapping("/findingDeletedOrder")
+	public String toFindDeleted( Integer totalcount, Integer pageCur, 
+			Model model,@ModelAttribute Order orderFid,HttpSession session) {
+		User user = (User)session.getAttribute("User");
+		Integer id = orderFid.getId();
+		String types = orderFid.getTypes();
+		List<Order> orderList = new ArrayList<Order>();
+		PageInfo  page = pageService.set(totalcount, pageCur);
+		Order ordernew = new Order();
+		if(id != null && types != null) {
+			orderList = Arrays.asList(orderService.getOne(id));
+		}else if(types!= null) {
+			orderList = orderService.selectOrderByUserAccountAndTypesAndPage(user.getAccount(), types, page);
+		}else {
+			orderList =orderService.selectOrderByUserAccountAndPage(user.getAccount(), page);
+		}
+		totalcount=orderList.size();
+		int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;	
+		model.addAttribute("orderList",orderList);
+		model.addAttribute("AllOrder", ordernew);
+		model.addAttribute("totalcount",totalcount);
+		model.addAttribute("totalpage",totalpage);
+		model.addAttribute("pageCur",page.getPageCur());
+		return "/recover";
+	}
 	//彻底删除订单控制
 	@RequestMapping("/delOrderWholly")//将请求映射为下列方法的注解
 	public String DelOrderWholly(Integer id,Integer totalcount,Model model) {
