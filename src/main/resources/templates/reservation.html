@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <title>Reservation</title>
     <link rel = "stylesheet" type="text/css"  th:href="@{/css/login.css}" />
-    
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -13,7 +14,7 @@
         <h2>订单</h2>
             <form th:action="@{/toReservation}" method="post" th:object="${order}">  
                     <div class="form-wrapper">
-                        <input type="text" th:field="*{room.id}" placeholder='房号' class="input-item" />
+                        <input type="text" th:field="*{room.id}" placeholder='房号' class="input-item"id = "roomid"/>
                         <input type="text" th:field="*{types}" placeholder='房间类型' class="input-item" />
                         <input type="text" th:field="*{in_time}" placeholder='入住时间' class="input-item" />
                         <input type="text" th:field="*{out_time}" placeholder='截止时间' class="input-item" />
@@ -22,7 +23,7 @@
                     </div>
                     <div>
                           <input type="reset" value="重置"  class="edit-btn"/>
-                          <a href="@{/main}"><button class="edit-btn">取消</button></a>
+                          <button class="edit-btn" onclick="cancelAndRedirect()">取消</button>
                           <button class="edit-btn2" type="submit" th:text="确认订单">确认订单</button>
                         
                     </div>
@@ -30,7 +31,13 @@
             </form>
         </div>
     </div>
-    
+    <script>
+		function cancelAndRedirect() {
+			document.getElementById("roomid").innerHTML = "";
+		}
+	</script>
+
+
 </body>
 
 </html>

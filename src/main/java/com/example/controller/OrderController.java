@@ -51,10 +51,14 @@ public class OrderController {
 	@RequestMapping("/toReservation")
 	public String toReservation(@ModelAttribute("order") Order order,
 			HttpSession session, Model model){
-	    //log.info(String.valueOf(order.getRoom().getId())+"前"+String.valueOf(order.getRoom().getVersion()));
+	    log.info(String.valueOf(order.getRoom().getId())+"前"+String.valueOf(order.getRoom().getVersion()));
 		//提取用户信息
 		User user = (User)session.getAttribute("User");
 		order.setUser(user);
+		if(order.getId()==null) {
+			//如果前端传来的房号为空，返回房间显示页面
+			return "redirect:/main";
+		}
 		//提取房间信息
 		Room room = (Room)session.getAttribute("room");
 		//乐观锁，判断是否有人提前预订

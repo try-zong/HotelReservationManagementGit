@@ -1,0 +1,60 @@
+<!DOCTYPE html> 
+<html lang="en" xmlns:th="https://www.thymeleaf.org"> 
+<head> 
+    <meta charset="UTF-8"> 
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title> 
+    <link rel = "stylesheet" type="text/css"  th:href="@{/css/login.css}" />
+    <script src="js/jquery-1.9.1.min.js"></script>
+	<script src="js/layer-v2.4/layer-v2.4/layer/layer.js"></script>
+	<script src="/js/demo.js"></script>
+
+
+   
+</head> 
+
+<body>
+
+ <div class="container">
+        <div class="login-wrapper">
+        <form th:action="@{/toBackUser}" method="post" th:object="${User}" id="backInfo"> 
+            <div class="header">BackUser</div>
+            <div class="form-wrapper">
+                <input type="text" th:field="*{account}"  placeholder="请输入用户名" id="InputUserAccount" class="input-item"/>
+                <input type="text" th:field="*{name}" placeholder="请输入真实姓名" id="InputUsername" class="input-item"/>
+                <div>
+                <input type="submit" name="Submit" value="找回密码" class="btn" />
+            	<input type="reset" name="Reset" value="重置" class="btn"/>
+                </div>
+                <a class="btn" th:href="@{/login}"style="display: block; width: 340px; margin: 15px auto 0;">返回</a>
+                <div style="text-align:center;">
+                <span th:if="${back}" th:text="${back}"  id="pwd" style="color:rgb(0, 255, 255);"></div>       
+            </div>        
+            </form>
+        </div>
+    </div>
+    <script>
+        var UserAccount = document.getElementById("InputUserAccount");
+        var Username = document.getElementById("InputUsername");
+        var pwd = document.getElementById("pwd");
+        var logInfo=document.getElementById("backInfo");
+   		logInfo.onsubmit=function () {
+ 			if(UserAccount.value==""){
+ 				alert("请输入用户名！");
+ 				return false;
+ 			}else if(Username.value==""){
+ 				alert("请输入真实姓名！");
+ 				return false;
+ 			}else{
+				 return true;
+			 };
+		};
+        InputUserAccount.onfocus = function () {
+ 			document.getElementById("pwd").innerHTML = "";
+		};
+		InputUsername.onfocus = function () {
+ 			document.getElementById("pwd").innerHTML = "";
+		};
+</script>
+</body>
+</html>

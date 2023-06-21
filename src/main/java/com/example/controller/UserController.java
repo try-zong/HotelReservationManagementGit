@@ -52,7 +52,7 @@ public class UserController {
 			if(userService.saveUser(user, file)>0) {
 				session.setAttribute("User",user);
 				model.addAttribute("User", user);
-				return "redirect:/main";
+				return "userInfoShow";
 			}else {
 				model.addAttribute("mistake", "修改失败");
 				return "redirect:/main";
@@ -60,11 +60,23 @@ public class UserController {
 		
 		}
 		//找回密码
-		@RequestMapping("/BackUser")
-		public String backUser(@ModelAttribute("User") User user, Model model){
+		@RequestMapping({"/BackUser"})
+		public String BackUser( Model model) {
+			User usernew = new User();
+			model.addAttribute("User", usernew);
+			return "backUser";
+		}
+		@RequestMapping("/toBackUser")
+		public String toBackUser(@ModelAttribute("User") User user, Model model){
+			if(user.getAccount()==null) {
+				log.info("totalcount=");
+				//按返回按钮，返回登录页面
+				return "/login";
+			}
+			log.info(user.getAccount());
 			User userInfo = userService.getOne(user.getAccount());
-			model.addAttribute("back",userInfo.getPassword() );
-				return "login";
+			model.addAttribute("back","密码为"+userInfo.getPassword() );
+				return "backUser";
 		}  
 
 		//管理员管理部分

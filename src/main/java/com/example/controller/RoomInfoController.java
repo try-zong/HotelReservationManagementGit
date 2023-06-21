@@ -144,17 +144,16 @@ public class RoomInfoController {
 		}
 	@RequestMapping("/toEditRoomInfo")
 	public String toEditRoomInfo(@ModelAttribute("Room") Room room,
-			@RequestParam(value="file",required=false) MultipartFile file,
+			@RequestParam("file") MultipartFile file,
 			HttpSession session, Model model){
 		//log.info("价格"+String.valueOf(room.getPrice()));
-		if(roomService.saveEdit(room, file)) {
+		if(roomService.saveEdit(room, file))
 	//	log.info("该方法执行了");
 	//	log.info("房间号"+String.valueOf(room.getId()));
         //model.addAttribute("user", user);
         return "redirect:/magRoom";
-		}else {
 		return "redirect:/magRoom";
-		}
+        
 	}
 	//删除房间
 	@RequestMapping("/deleteRoom")     
