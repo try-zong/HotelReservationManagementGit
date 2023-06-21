@@ -1,4 +1,5 @@
 package com.example.entity;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import lombok.Data;
@@ -14,7 +15,12 @@ public class Order {
 	private String phone;
 	private String room_id;
 	private String user_account2;
+	private LocalDate create;     //创建订单的时间
 	private int deleted;	//判断该订单是否删除,1为删除，0为未删
+	private LocalDateTime deletedAt;//删除订单的时间
+	private Room room;
+	private User user;
+	
 	public String getRoom_id() {
 		return room_id;
 	}
@@ -39,9 +45,6 @@ public class Order {
 	public void setDeletedAt(LocalDateTime deletedAt) {
 		this.deletedAt = deletedAt;
 	}
-	private LocalDateTime deletedAt;//删除订单的时间
-	private Room room;
-	private User user;
 	
 	public Integer getId() {
 		return id;

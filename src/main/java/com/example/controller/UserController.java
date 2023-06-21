@@ -1,7 +1,6 @@
 package com.example.controller;
 
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,8 +59,14 @@ public class UserController {
 			}  
 		
 		}
+		//找回密码
+		@RequestMapping("/BackUser")
+		public String backUser(@ModelAttribute("User") User user, Model model){
+			User userInfo = userService.getOne(user.getAccount());
+			model.addAttribute("back",userInfo.getPassword() );
+				return "login";
+		}  
 
-		
 		//管理员管理部分
 		
 		@RequestMapping("/magUser")

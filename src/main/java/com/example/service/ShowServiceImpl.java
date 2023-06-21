@@ -30,4 +30,16 @@ public class ShowServiceImpl implements ShowService{
 		return showMapper.selectCountGroupByTypes();
 	}
 
+	@Override
+	public List<Hot> selectOrderCountGroupByCreate() {
+		// TODO Auto-generated method stub
+		return showMapper.selectOrderCountGroupByCreate();
+	}
+
+	@Override
+	public List<Hot> sumMoneyGroupByCreate() {
+		// TODO Auto-generated method stub
+		return showMapper.sumMoneyGroupByCreate();
+	}
+
 }

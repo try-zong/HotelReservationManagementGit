@@ -5,7 +5,7 @@
 <mapper namespace="com.example.mapper.OrderMapper">
 	<!--插入订单，主键自增-->
 	<insert id="addOrder" parameterType="Order" keyProperty="id" useGeneratedKeys="true">
-   		insert into `order` (money,in_time,out_time,state,types,phone,room_id,user_account2) values(#{money},#{in_time},#{out_time},"进行中",#{types},#{phone},#{room.id},#{user.account})
+   		insert into `order` (money,in_time,out_time,state,types,phone,room_id,user_account2,`create`) values(#{money},#{in_time},#{out_time},"进行中",#{types},#{phone},#{room.id},#{user.account},#{create})
 	</insert>
 	<!--通过订单号查询订单关联的房间-->
 	<select id="selectRoomIdById"  resultType="Integer" parameterType="Integer" > 

@@ -26,4 +26,18 @@
     	FROM room 
     	GROUP BY types
     </select>
+    <select id="selectOrderCountGroupByCreate" resultMap="roomHot"> 
+    	SELECT `create` AS `name`,count(*) AS num 
+    	FROM `Order`
+    	WHERE `create` >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+    	GROUP BY `create`
+    	ORDER BY `create` ASC
+    </select>
+     <select id="sumMoneyGroupByCreate" resultMap="roomHot"> 
+    	SELECT `create` AS `name`,SUM(money) AS num 
+    	FROM `Order`
+    	WHERE DATE(`create`) >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+    	GROUP BY `create`
+    	ORDER BY `create` ASC
+    </select>
 </mapper> 

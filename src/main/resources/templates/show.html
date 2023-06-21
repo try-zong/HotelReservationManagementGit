@@ -66,7 +66,14 @@
             <h6>最热门的房间</h6>
             <canvas id="barChart" class="chartCanvas"></canvas>
         </div>
-
+   		<div class="chartContainer">
+            <h6>7日订单数量统计</h6>
+            <canvas id="barChart1" class="chartCanvas"></canvas>
+        </div>
+        <div class="chartContainer">
+            <h6>7日盈利统计</h6>
+            <canvas id="lineChart" class="chartCanvas"></canvas>
+        </div>
         <div class="chartContainer">
             <h6>房间类型趋势</h6>
             <canvas id="pieChart" class="chartCanvas"></canvas>
@@ -74,13 +81,13 @@
     </div>
 
     <script th:inline="javascript">
-        // Bar Chart
+		//最热门的房间柱状图
         var barRoomNames = /*[[${topThree.![name]}]]*/ [];
         var barRoomCounts = /*[[${topThree.![num]}]]*/ [];
 
         var barChartCanvas = document.getElementById('barChart');
         var barChartCtx = barChartCanvas.getContext('2d');
-		//柱状图
+
         new Chart(barChartCtx, {
             type: 'bar',
             data: {
@@ -104,6 +111,67 @@
                 }
             }
         });
+		//7日订单数量统计柱状图
+        var barOrderNames = /*[[${orderCount.![name]}]]*/ [];
+        var barOrderCounts = /*[[${orderCount.![num]}]]*/ [];
+
+        var barChartCanvas = document.getElementById('barChart1');
+        var barChartCtx = barChartCanvas.getContext('2d');
+
+        new Chart(barChartCtx, {
+            type: 'bar',
+            data: {
+                labels: barOrderNames,
+                datasets: [{
+                    label: '订单数量',
+                    data: barOrderCounts,
+                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: Math.max(...barOrderCounts) + 1
+                    }
+                }
+            }
+        });
+
+    		//七日盈利折线图
+    		var lineMoneyNames = /*[[${sumMoney.![name]}]]*/ [];
+    		var lineMoneyCounts = /*[[${sumMoney.![num]}]]*/ [];
+    		var lineChartCanvas = document.getElementById('lineChart');
+    		var lineChartCtx = lineChartCanvas.getContext('2d');
+    		new Chart(lineChartCtx, {
+   		    type: 'line',
+        	data: {
+            	labels: lineMoneyNames,
+            		datasets: [{
+                		label: '盈利',
+                		data: lineMoneyCounts,
+                		backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                		borderColor: 'rgba(75, 192, 192, 1)',
+                		borderWidth: 1,
+                		fill: false
+            		}]
+        	},
+        	options: {
+            	responsive: true,
+            	maintainAspectRatio: false,
+            	scales: {
+                	y: {
+                    	beginAtZero: true,
+                    	max: Math.max(...lineMoneyCounts) + 5
+                	}
+            	}
+        	}
+    	});
+
 
         //饼图
         var pieRoomData = [

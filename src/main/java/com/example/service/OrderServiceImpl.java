@@ -1,8 +1,8 @@
 package com.example.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,6 +93,8 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public int addOrder(Order order) {
 		// TODO Auto-generated method stub
+		order.setCreate(LocalDate.now());
+		log.info("chaungjian"+String.valueOf(order.getCreate()));
 		return orderMapper.addOrder(order);
 	}
 	
