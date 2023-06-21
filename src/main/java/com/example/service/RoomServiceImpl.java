@@ -68,7 +68,7 @@ public class RoomServiceImpl implements RoomService {
 	@Override
 	public int addRoom(Room room,MultipartFile file) {
 		// TODO Auto-generated method stub
-		if (file != null){
+		if (!file.isEmpty()){
             // 原始文件名
             String originalFileName = file.getOriginalFilename(); 
             // 获取图片后缀
@@ -118,7 +118,7 @@ public class RoomServiceImpl implements RoomService {
 	//修改房间信息
 	@Override
 	public  boolean saveEdit(Room room, MultipartFile file) {
-		if (file != null){
+		if (!file.isEmpty()){
             // 原始文件名
             String originalFileName = file.getOriginalFilename(); 
             // 获取图片后缀

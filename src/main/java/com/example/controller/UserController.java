@@ -80,7 +80,7 @@ public class UserController {
 			int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;	
 			model.addAttribute("totalcount",totalcount);
 			model.addAttribute("userList",userList);
-			model.addAttribute("totalpage",totalpage);
+			model.addAttribute("totalpage",totalpage); 
 			model.addAttribute("pageCur",page.getPageCur());
 			return "magUser";
 		}

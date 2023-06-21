@@ -6,8 +6,11 @@
     <link rel = "stylesheet" type="text/css"  th:href="@{/css/login.css}" />
 </head>
 <body>
+
+
  <div class="container">
         <div class="login-wrapper">
+					<h2>房间信息</h2>
 		<form th:action="@{/toEditRoomInfo}" method="post" th:object="${Room}" enctype="multipart/form-data"> 
      		 <div class="form-wrapper">
     			
@@ -19,9 +22,9 @@
 				<input type="file" name="file" class="input-item"/>
 			</div>
 			<div>
-			<button type = "submit" th:text="确认修改" ></button>
-			<input type = "reset" value = "重置" />
-			<td><a th:href="@{/magRoom}">取消</a></td>
+			<input type = "reset" value = "重置" class="edit-btn"/>
+			<a th:href="@{/magRoom}" ><button class="edit-btn">取消</button></a>
+			<button type = "submit" th:text="确认修改" class="edit-btn2" >确认修改</button>
 			</div>
 			
 		</form>

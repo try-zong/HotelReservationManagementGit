@@ -65,9 +65,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int saveUser(User user, MultipartFile file) {
+	public int  saveUser(User user, MultipartFile file) {
 		// TODO Auto-generated method stub
-		if (file != null){
+		if (!file.isEmpty()){
             // 原始文件名
             String originalFileName = file.getOriginalFilename(); 
             // 获取图片后缀

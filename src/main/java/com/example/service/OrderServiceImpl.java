@@ -56,8 +56,8 @@ public class OrderServiceImpl implements OrderService {
 		// TODO Auto-generated method stub
 		int rows = page.getRows();
 		int offset = page.getOffset();
-		log.info(String.valueOf(rows));
-		log.info(String.valueOf(offset));
+	//log.info(String.valueOf(rows));
+		//log.info(String.valueOf(offset));
 		return orderMapper.selectOrderByUserAccountAndTypesAndPage(account, types, offset, rows);
 	}
 
@@ -79,8 +79,8 @@ public class OrderServiceImpl implements OrderService {
 		// TODO Auto-generated method stub
 		int rows = page.getRows();
 		int offset = page.getOffset();
-		log.info(String.valueOf(rows));
-		log.info(String.valueOf(offset));
+	//	log.info(String.valueOf(rows));
+	//	log.info(String.valueOf(offset));
 		return orderMapper.selectOrderByTypes(types, offset, rows);
 	}
 
@@ -94,7 +94,7 @@ public class OrderServiceImpl implements OrderService {
 	public int addOrder(Order order) {
 		// TODO Auto-generated method stub
 		order.setCreate(LocalDate.now());
-		log.info("chaungjian"+String.valueOf(order.getCreate()));
+		//log.info("chaungjian"+String.valueOf(order.getCreate()));
 		return orderMapper.addOrder(order);
 	}
 	

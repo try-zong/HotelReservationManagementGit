@@ -14,6 +14,12 @@
 		    background-color: #F1F1F1;
 		    border: none;
         }
+        form label {
+            float: left;
+            margin-left: 20px;
+            height: 36px;
+            line-height: 36px;
+        }
         form lable {
         	float: left;
         }
@@ -32,7 +38,6 @@
         form input[type="reset"] {
             width: 100%;
             padding: 10px;
-            margin-top: 10px;
             border-radius: 5px;
             border: none;
             background-color: white;
@@ -43,21 +48,54 @@
 
         table {
             width: 100%;
-            margin-top: 20px;
             border-collapse: collapse;
+            box-shadow: 5px 5px black;
         }
-
+        thead tr {
+            height: 74px;
+            background-color: white;
+        }
         th {
-            background-color: #f2f2f2;
             padding: 10px;
             text-align: center;
         }
-
+        tbody tr {
+            height: 74px;
+        }
+        tbody tr:hover {
+            background-color: antiquewhite;
+        }
         td {
             padding: 10px;
             text-align: center;
+            border: none;
         }
-
+        td a {
+            cursor: pointer;
+        }
+        a{
+        	
+        	color:gray;
+        }
+       
+        td a:hover {
+            color: pink;
+        }
+        
+ 		a.ab{
+ 		    display: block;
+		    background-color: #333;  
+		    border: none;
+		    border-radius: 18px;
+		    line-height: 10px;
+		    color: #F8C400;
+		    cursor: pointer;
+		    width: 100px;
+		    height: 36px;
+		    float: left;
+		    font-size: 16px;
+		    margin-left: 30px;
+        }
         .pagination {
             list-style-type: none;
             display: flex;

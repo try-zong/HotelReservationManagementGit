@@ -99,5 +99,11 @@ public class Order {
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public LocalDate getCreate() {
+		return create;
+	}
+	public void setCreate(LocalDate create) {
+		this.create = create;
 	} 
 }

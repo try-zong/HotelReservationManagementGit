@@ -5,7 +5,7 @@
         }
 
         .container {
-            max-width: 1000px;
+            height: calc(100vh - 280px);
             margin: 0 auto;
             padding: 20px;
         }
@@ -25,7 +25,6 @@
         /* Form styles */
         .form-container {
             margin-bottom: 20px;
-            width:200px;
             height:100px;
             
            
@@ -33,16 +32,24 @@
 
         .form-container h2 {
             margin-bottom: 10px;
+            margin-bottom: 40px;
         }
 
         .form-container input[type="text"],
         .form-container select {
-            width: 100px;
+            margin: 0;
+            width: 300px;
+            height: 30px;
+            border: none;
+            border-radius: 10px;
             padding: 2px;
             border: 1px solid #ccc;
             border-radius: 5px;
 		    float: left;
 		    margin-left: 20px;
+        }
+        .form-container select {
+            height: 36px;
         }
 
         .form-container input[type="submit"],
@@ -51,16 +58,27 @@
 		    background-color: #333;
 		    color: #fff;
 		    border: none;
-		    border-radius: 5px;
+            border-radius: 18px;
+            line-height: 10px;
+            color: #F8C400;
 		    cursor: pointer;
 		    width: 100px;
-		    height: 30px;
+		    height: 36px;
 		    float: left;
+            font-size: 16px;
+            margin-left: 30px;
         }
 
         /* Table styles */
         .table-container {
+            border: 1px solid #394154;
+            max-height: calc(100vh - 310px);
             overflow-x: auto;
+            width: calc(100% - 250px);
+            box-shadow: #2B3245;
+            margin: auto;
+            margin-top: 30px;
+            box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
         }
 
         table {
@@ -72,13 +90,15 @@
         table th,
         table td {
             padding: 10px;
-            border: 1px solid #ccc;
         }
 
         /* Pagination styles */
         .pagination-container {
             margin-top: 20px;
             text-align: center;
+        }
+        .pointer {
+            cursor: pointer;
         }
 
         .pagination-container ul {
@@ -130,11 +150,35 @@
         
         .tab-bar {
        	    float: left;
-		    height: 100vh;
+		    height: calc(100vh - 82px);
 		    width: 10%;
-		    background-color: cadetblue;
+		    background-color: #394154;
+        }
+        .tab-bar li{
+            text-align: center;
+            height: 30px;
+            line-height: 30px;
+        }
+        .tab-bar li:hover {
+            background-color: #F8C400;
+        }
+        .tab-bar span {
+            color: white;
+        }
+        .tab-bar span:hover {
+            color: black;
         }
         .main {
         	float: left;
     		width: calc(100% - 240px);
+        }
+        .main-title {
+            text-align: left;
+            background-color: #2B3245;
+        }
+        .main-title h1 {
+            margin: 0;
+            padding: 20px;
+            color: #F9C100;
+            padding-left: 50px;
         }

@@ -64,7 +64,7 @@ public class OrderController {
 		}else {
 			//预订成功，返回订单管理页面
 			orderService.addOrder(order);
-			return "redirect:/manageOrder";
+			return "redirect:/main";
 		}
 		
 	}
@@ -223,7 +223,7 @@ public class OrderController {
 		if(id != null && types != null) {
 			orderList = Arrays.asList(orderService.getOne(id));
 		}else if(types != null) {
-			log.info(types);
+		//	log.info(types);
 			orderList = orderService.selectOrderByTypes(types, page);
 		}else {
 			orderList =orderService.selectAllOrderByPage(page);

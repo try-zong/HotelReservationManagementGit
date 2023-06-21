@@ -7,6 +7,9 @@
     <link rel="stylesheet" type="text/css" href="css/managerOrder.css">
 </head>
 <body>
+ <div class="main-title">
+        <h1>酒店预订系统</h1>
+    </div>
 <div class="tab-bar">
 <ul class="menu">
         <li>
@@ -35,55 +38,62 @@
         </li>
     </ul>
 </div>
+
+<div class="chartsContainer">
+	<div class="form-container">
+		<form th:action="@{/selectOrder}" method="post" th:object="${AllOrder}"> 
+			<h2 class="title">订单检索</h2>
+			 	<label for="orderId">房间号:</label>
+				<input type="text" id="orderId" th:field="*{id}" placeholder="请输入房间号">
+	            <label for="roomType">房间类型:</label>
+	            <select id="roomType" th:field="*{types}">
+	                	<option value="标间">标间</option>
+		               	<option value="商务房">商务房</option>
+		               	<option value="亲子房">亲子房</option>
+		               	<option value="双人房">双人房</option>
+		               	<option value="情侣房">情侣房</option>
+		           		<option value="大床房">大床房</option>
+	            </select>
+	            <input type="submit" name="Submit" value="查询">
+	            <input type="reset" name="Reset" value="重置">
+	     </form>
+     </div>
+</div>
+
 <div class="container">
-  
-    <div class="form-container">
-	<form th:action="@{/selectOrder}" method="post" th:object="${AllOrder}"> 
-		<h2 class="title">订单检索</h2>
-		房间号:<input type="text" th:field="*{id}" placeholder="请输入房间号"><br>
-            <label for="roomType">房间类型:</label>
-            <select id="roomType" th:field="*{types}">
-                <option value="标间">标间</option>
-                <option value="双人房">双人房</option>
-                <option value="总统套房">总统套房</option>
-            </select>
-            <input type="submit" name="Submit" value="查询">
-            <input type="reset" name="Reset" value="重置">
-        </form>
-        </div>
-        <div class="table-container">
+	<div class="table-container">
         	<table> 
-			<thead >
-				<tr>
-					<th><div style="text-align:center;">订单号</div></th>
-					<th><div style="text-align:center;">房间号</div></th>
-					<th><div style="text-align:center;">房间类型</div></th>
-					<th><div style="text-align:center;">创建时间</div></th>
-					<th><div style="text-align:center;">订单价格</div></th>	
-					<th><div style="text-align:center;">订单创建者</div></th>	
-				<tr>
-			</thead>
-			<tbody>
-				<tr th:each="order:${orderList}">
-					<!-- 循环-->       
-					<td><a th:text="${order.id}" ></a></td>    
-	    			<td><a th:text="${order.room_id}"></a></td>
-	    			<td><a th:text="${order.types}"></a></td>
-	   				<td><a th:text="${order.in_time}"></a>
-	   				<td><a th:text="${order.money}" ></a></td>
-	   				<td><a th:text="${order.user_account2}" ></a></td>
-				</tr> 
-			</tbody>
+				<thead >
+					<tr>
+						<th><div style="text-align:center;">订单号</div></th>
+						<th><div style="text-align:center;">房间号</div></th>
+						<th><div style="text-align:center;">房间类型</div></th>
+						<th><div style="text-align:center;">创建时间</div></th>
+						<th><div style="text-align:center;">订单价格</div></th>	
+						<th><div style="text-align:center;">订单创建者</div></th>	
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="order:${orderList}">
+						<!-- 循环-->       
+						<td><a th:text="${order.id}" ></a></td>    
+		    			<td><a th:text="${order.room_id}"></a></td>
+		    			<td><a th:text="${order.types}"></a></td>
+		   				<td><a th:text="${order.in_time}"></a></td>
+		   				<td><a th:text="${order.money}" ></a></td>
+		   				<td><a th:text="${order.user_account2}" ></a></td>
+					</tr> 
+				</tbody>
 			</table>
-		</div>
+	</div>
 		<div class="pagination-container">
-		<ul>
-			<li><a>共<span th:text="${totalcount}"></span>条记录</a></li>
-			<li><a>共<span th:text="${totalpage}"></span>页</a></li>
-			<li><a>第<span th:text="${pageCur}"></span>页</a></li>
-			<li><a th:href="@{manageOrder(totalcount=${totalcount},pageCur=${pageCur}-1)}" th:if="${pageCur!=1}">上一页</a></li>
-			<li><a th:href="@{manageOrder(totalcount=${totalcount},pageCur=${pageCur}+1)}" th:if="${pageCur<totalpage}">下一页</a></li>
-		</ul>>
+			<ul>
+				<li><a>共<span th:text="${totalcount}"></span>条记录</a></li>
+				<li><a>共<span th:text="${totalpage}"></span>页</a></li>
+				<li><a>第<span th:text="${pageCur}"></span>页</a></li>
+				<li><a th:href="@{manageOrder(totalcount=${totalcount},pageCur=${pageCur}-1)}" th:if="${pageCur!=1}">上一页</a></li>
+				<li><a th:href="@{manageOrder(totalcount=${totalcount},pageCur=${pageCur}+1)}" th:if="${pageCur<totalpage}">下一页</a></li>
+			</ul>
        	</div>
 </div>
 </body>

@@ -34,7 +34,7 @@ public class ShowController {
 		roomScale = showService.selectCountGroupByTypes();
 		orderCount = showService.selectOrderCountGroupByCreate();
 		sumMoney = showService.sumMoneyGroupByCreate();
-		log.info("比例"+String.valueOf(orderCount.get(1).getName()));
+		//log.info("比例"+String.valueOf(orderCount.get(1).getName()));
 		model.addAttribute("topOne",topOne);
 		model.addAttribute("topThree",topThree);
 		model.addAttribute("roomScale",roomScale);

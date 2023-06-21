@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
     <title>userInfoShow</title>
      <link rel="stylesheet" type="text/css" href="css/order.css">
+         <link rel="stylesheet" type="text/css" href="css/managerOrder.css">
+	<link rel = "stylesheet" type="text/css"  th:href="@{/css/logininfo.css}" />
 </head>
 <body>
+<div class="main-title">
+        <h1>酒店预订系统</h1>
+    </div>
 <div class="tab-bar">
 <ul class="menu">
         <li>
@@ -33,7 +38,7 @@
             </a>
         </li>
         <li>
-        	<a href="/userMag">
+        	<a href="/userInfoShow">
             <span>
                 <i class="el-icon-s-tools"></i>
                 <span>个人信息</span>
@@ -43,21 +48,33 @@
     </ul>
 </div>
  <div class="container">
-        <div class="login-wrapper">
-	<form th:object="${User}" enctype="multipart/form-data"> 
-       <div class="header"></div>
-       <div class="form-wrapper">
-       		<img th:src="*{img}" style="width:100px; height:100px;"/>
-       		<input contenteditable="true" type="text" placeholder="请输入用户名" th:field="*{account}" class="input-item"/>	
-   			<input contenteditable="true" type="text" placeholder="请输入年龄" th:field="*{age}" class="input-item"/>
-       		<input contenteditable="true" type="text" placeholder="请输入姓名" th:field="*{name}" class="input-item"/>
-       </div>
-    	<div>
-    		<a th:href="@{/userMag}"th:onclick="alertInfo()"  th:text="修改" /></a>
-    		<a th:href="@{/userMag}"th:onclick="alertInfo()"  th:text="取消" /></a>
-    	</div>
-	</form>
-	</div>
-	</div>
+    <div class="table-container">
+    	 <table>
+            <thead>
+            	<tr>
+            		<th><div style="text-align:center;">头像</div></th>
+                	<th><div style="text-align:center;">用户名</div></th>
+                	<th><div style="text-align:center;">密码</div></th>
+                	<th><div style="text-align:center;">姓名</div></th>
+                	<th><div style="text-align:center;">年龄</div></th>
+                	<th><div style="text-align:center;">等级</div></th>
+            		<th><div style="text-align:center;">操作</div></th>
+            	</tr>
+            </thead>
+            <tbody>
+            <tr th:each="user:${User}">
+            	<td><img th:src="*{img}" style="width:60px; height:60px;"/></td>
+            	<td><a th:text="${user.account}"></a></td>
+                <td><a th:text="${user.password}"></a></td>
+               	<td><a th:text="${user.name}"></a></td>
+                <td><a th:text="${user.age}"></a></td> 
+                <td><a th:text="${user.scale}"></a></td> 
+                <td><a th:href="@{/userMag}"th:onclick="alertInfo()"  th:text="修改" /></a></td>
+            </tr>
+            </tbody>
+        </table>
+        
+    </div>			
+</div>
 </body>
 </html>

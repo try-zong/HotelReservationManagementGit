@@ -4,91 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Reservation</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th,
-        td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #ccc;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        input[type="text"],
-        textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        input[type="submit"],
-        input[type="reset"] {
-            display: block;
-            width: 100px;
-            padding: 10px;
-            margin-top: 10px;
-            background-color: #333;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-    </style>
+    <link rel = "stylesheet" type="text/css"  th:href="@{/css/login.css}" />
+    
 </head>
-
 <body>
-    <form th:action="@{/toReservation}" method="post" th:object="${order}">
-        <table>
-            <tr>
-                <td>房号</td>
-                <td>
-                    <p th:text="*{room.id}"></p>
-                </td>
-                <input type="hidden" th:field="*{room.id}" />
-                <td>房间类型</td>
-                <td>
-                    <p th:text="*{types}"></p>
-                </td>
-                <input type="hidden" th:field="*{types}" />
-            </tr>
-            <tr>
-                <td>入住时间</td>
-                <td><input contenteditable="true" type="text" th:field="*{in_time}"></td>
-                <td>截止时间</td>
-                <td><input contenteditable="true" type="text" th:field="*{out_time}"></td>
-            </tr>
-            <tr>
-                <td>联系方式</td>
-                <td><textarea th:field="*{phone}"></textarea></td>
-                <td>金额</td>
-                <td>
-                    <p th:text="*{money}"></p>
-                </td>
-                <input type="hidden" th:field="*{money}" />
-            </tr>
-            <tr>
-                <td><button type="submit" th:text="确认订单"></button></td>
-                <td><input type="reset" value="重置" /></td>
-                <td>取消</td>
-            </tr>
-        </table>
-    </form>
+    <div class="container">
+        <div class="login-wrapper">
+        <h2>订单</h2>
+            <form th:action="@{/toReservation}" method="post" th:object="${order}">  
+                    <div class="form-wrapper">
+                        <input type="text" th:field="*{room.id}" placeholder='房号' class="input-item" />
+                        <input type="text" th:field="*{types}" placeholder='房间类型' class="input-item" />
+                        <input type="text" th:field="*{in_time}" placeholder='入住时间' class="input-item" />
+                        <input type="text" th:field="*{out_time}" placeholder='截止时间' class="input-item" />
+                        <input type="text" th:field="*{phone}" placeholder='联系方式' class="input-item" />
+                        <input type="text" th:field="*{money}" placeholder='金额' class="input-item" />
+                    </div>
+                    <div>
+                          <input type="reset" value="重置"  class="edit-btn"/>
+                          <a href="@{/main}"><button class="edit-btn">取消</button></a>
+                          <button class="edit-btn2" type="submit" th:text="确认订单">确认订单</button>
+                        
+                    </div>
+                
+            </form>
+        </div>
+    </div>
+    
 </body>
 
 </html>
+

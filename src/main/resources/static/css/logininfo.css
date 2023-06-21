@@ -1,4 +1,9 @@
-    * {
+
+    
+    
+    
+    
+     * {
             margin: 0;
             padding: 0;
         }
@@ -10,7 +15,7 @@
         }
         .container {
             height: 100%;
-            background: url("/img/11.png") no-repeat;
+            background: url("") no-repeat;
             background-size: 100% 130%;
         }
         .login-wrapper {
