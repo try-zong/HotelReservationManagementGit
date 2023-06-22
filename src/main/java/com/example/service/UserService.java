@@ -29,6 +29,8 @@ public interface UserService {
 	public int getManagerId(int id);	//获得一个用户信息
 	public List<User> selectUserByScale(String scale,PageInfo page);	//根据权限搜索用户
 	public int degradeUserScale(String account);	//降低用户权限
+	public int degradeUserScaleSvip(String account);	//降低用户权限
+	public int upgradeUserScaleSvip(String account);	//升级用户权限
 	public int upgradeUserScale(String account);	//升级用户权限
 
 }

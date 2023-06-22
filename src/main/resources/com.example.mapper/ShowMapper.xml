@@ -40,4 +40,10 @@
     	GROUP BY `create`
     	ORDER BY `create` ASC
     </select>
+    <select id="heightCommentRoom" resultMap="roomHot"> 
+    	SELECT id AS `name`,comment AS scale
+    	FROM room
+    	ORDER BY comment desc
+    	LIMIT 8
+    </select>
 </mapper> 

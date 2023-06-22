@@ -120,6 +120,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public int degradeUserScaleSvip(String account) {
+		// TODO Auto-generated method stub
+		return userMapper.degradeUserScaleSvip(account);
+	}
+
+	@Override
+	public int upgradeUserScaleSvip(String account) {
+		// TODO Auto-generated method stub
+		return userMapper.upgradeUserScaleSvip(account);
+	}
+
+	@Override
 	public int upgradeUserScale(String account) {
 		// TODO Auto-generated method stub
 		return userMapper.upgradeUserScale(account);

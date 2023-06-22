@@ -42,4 +42,10 @@ public class ShowServiceImpl implements ShowService{
 		return showMapper.sumMoneyGroupByCreate();
 	}
 
+	@Override
+	public List<Hot> heightCommentRoom() {
+		// TODO Auto-generated method stub
+		return showMapper.heightCommentRoom();
+	}
+
 }

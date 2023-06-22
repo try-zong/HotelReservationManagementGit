@@ -43,6 +43,14 @@
 		update User set scale="vip"
 		where account=#{account}
 	</update>
+	    <update id="degradeUserScaleSvip"  >
+		update User set scale="svip"
+		where account=#{account}
+	</update>
+	<update id="upgradeUserScaleSvip"  >
+		update User set scale="svip"
+		where account=#{account}
+	</update>
 	<update id="upgradeUserScale"  >
 		update User set scale="ssvip"
 		where account=#{account}

@@ -66,7 +66,7 @@
 </div>
     <div id="chartsContainer">
         <div class="chartContainer">
-            <h6>最热门的房间</h6>
+            <h6>高评分房间</h6>
             <canvas id="barChart" class="chartCanvas"></canvas>
         </div>
    		
@@ -74,12 +74,17 @@
             <h6>房间类型趋势</h6>
             <canvas id="pieChart" class="chartCanvas"></canvas>
         </div>
+        
+         <div class="chartContainer">
+            <h6>最热门的房间</h6>
+            <canvas id="roseChart" class="chartCanvas"></canvas>
+        </div>
     </div>
 
     <script th:inline="javascript">
-		//最热门的房间柱状图
-        var barRoomNames = /*[[${topThree.![name]}]]*/ [];
-        var barRoomCounts = /*[[${topThree.![num]}]]*/ [];
+		//高评分房间柱状图
+        var barRoomNames = /*[[${heightRoom.![name]}]]*/ [];
+        var barRoomCounts = /*[[${heightRoom.![scale]}]]*/ [];
 
         var barChartCanvas = document.getElementById('barChart');
         var barChartCtx = barChartCanvas.getContext('2d');
@@ -89,9 +94,9 @@
             data: {
                 labels: barRoomNames,
                 datasets: [{
-                    label: '房间数量',
+                    label: '评分',
                     data: barRoomCounts,
-                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                    backgroundColor: 'rgba(122,222, 120, 0.3)',
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1
                 }]
@@ -102,7 +107,7 @@
                 scales: {
                     y: {
                         beginAtZero: true,
-                        max: Math.max(...barRoomCounts) + 5
+                        max: Math.max(...barRoomCounts) + 0.5
                     }
                 }
             }
@@ -143,6 +148,39 @@
                 }
             }
         });
+        
+         //最热门的房间等弧度玫瑰图
+    var roseRoomNames = /*[[${topThree.![name]}]]*/ [];
+    var roseRoomCounts = /*[[${topThree.![num]}]]*/ [];
+
+    var roseChartCanvas = document.getElementById('roseChart');
+    var roseChartCtx = roseChartCanvas.getContext('2d');
+
+    new Chart(roseChartCtx, {
+        type: 'polarArea',
+        data: {
+            labels: roseRoomNames,
+            datasets: [{
+                label: '房间数量',
+                data: roseRoomCounts,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 205, 86, 0.5)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 205, 86, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
     </script>
 </body>
 </html>

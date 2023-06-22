@@ -31,5 +31,7 @@ public interface UserMapper {
 	public int saveUser(User user); //修改用户信息
 	public List<User> selectUserByScale(@Param("scale")String scale,@Param("offset")int offset,@Param("rows")int rows );	//根据权限搜索用户
 	public int degradeUserScale(String account);	//降低用户权限
+	public int degradeUserScaleSvip(String account);	//降低用户权限
+	public int upgradeUserScaleSvip(String account);	//升级用户权限
 	public int upgradeUserScale(String account);	//升级用户权限
 }

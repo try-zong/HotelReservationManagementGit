@@ -50,25 +50,32 @@
 </div>
  <div class="container">
     <div class="table-container">
-    	
-    		<table>
-    		 <form th:action="@{/userMag}" method="post" th:object="${User}" >
-            	 <div class="form-wrapper">
-            	 	<label for="orderId">头像:</label><span><img th:src="*{img}" style="width:60px; height:60px;" class="input-item"/></span>
-			         <label for="orderId">用户名:</label><span type="text" th:text="*{account}"  class="input-item"></span>
-			         <label for="orderId">年龄:</label><span  type="text" th:text="*{age}"  class="input-item"></span>
-			         <label for="orderId">姓名:</label><span  type="text" th:text="*{name}"  class="input-item"></span>
-			         <label for="orderId">密码:</label><span  type="text" th:text="*{password}"  class="input-item"></span>
-			        
-			        
-			     </div>
-			     <div>
-					<a th:href="@{/userMag}"><button class="edit-btn">修改</button></a>
-				 </div>
-				 </form>
-       		</table>
-    	
-    </div>		
+    	 <table>
+            <thead>
+            	<tr>
+            		<th><div style="text-align:center;">头像</div></th>
+                	<th><div style="text-align:center;">用户名</div></th>
+                	<th><div style="text-align:center;">密码</div></th>
+                	<th><div style="text-align:center;">姓名</div></th>
+                	<th><div style="text-align:center;">年龄</div></th>
+                	<th><div style="text-align:center;">等级</div></th>
+            		<th><div style="text-align:center;">操作</div></th>
+            	</tr>
+            </thead>
+            <tbody>
+            <tr th:each="user:${User}">
+            	<td><img th:src="${user.img}" style="width:60px; height:60px;"/></td>
+            	<td><a th:text="${user.account}"></a></td>
+                <td><a th:text="${user.password}"></a></td>
+               	<td><a th:text="${user.name}"></a></td>
+                <td><a th:text="${user.age}"></a></td> 
+                <td><a th:text="${user.scale}"></a></td> 
+                <td><a th:href="@{/userMag}"th:onclick="alertInfo()"  th:text="修改" /></a></td>
+            </tr>
+            </tbody>
+        </table>
+        
+    </div>			
 </div>
 
 

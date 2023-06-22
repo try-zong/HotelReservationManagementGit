@@ -29,17 +29,20 @@ public class ShowController {
 		List<Hot> roomScale = new ArrayList<Hot>();
 		List<Hot> orderCount = new ArrayList<Hot>();
 		List<Hot> sumMoney = new ArrayList<Hot>();
+		List<Hot> heightRoom = new ArrayList<Hot>();
 		topOne = showService.selectTopOneRoom();
 		topThree = showService.selectTopThreeRoom();
 		roomScale = showService.selectCountGroupByTypes();
 		orderCount = showService.selectOrderCountGroupByCreate();
 		sumMoney = showService.sumMoneyGroupByCreate();
+		heightRoom = showService.heightCommentRoom();
 		//log.info("比例"+String.valueOf(orderCount.get(1).getName()));
 		model.addAttribute("topOne",topOne);
 		model.addAttribute("topThree",topThree);
 		model.addAttribute("roomScale",roomScale);
 		model.addAttribute("orderCount",orderCount);
 		model.addAttribute("sumMoney",sumMoney);
+		model.addAttribute("heightRoom",heightRoom);
 		return "show";
 	}
 	@RequestMapping("/magMain")

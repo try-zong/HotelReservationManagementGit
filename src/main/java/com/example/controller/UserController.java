@@ -146,10 +146,44 @@ public class UserController {
 			model.addAttribute("pageCur",page.getPageCur());
 			return "magUser";
 		}
+		@RequestMapping("/degradeSvipUser")
+		public String degradeSvipUser(Integer totalcount, Integer pageCur,
+				HttpSession session, Model model,String account){
+			userService.degradeUserScaleSvip(account);
+			PageInfo  page =pageService.set(totalcount, pageCur);
+			List<User> userList = new ArrayList<User>();
+			userList =userService.findAll(page);
+			totalcount =userService.selectUserCount();
+			int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;	
+			User user = new User();
+			model.addAttribute("User",user);
+			model.addAttribute("totalcount",totalcount);
+			model.addAttribute("userList",userList);
+			model.addAttribute("totalpage",totalpage); 
+			model.addAttribute("pageCur",page.getPageCur());
+			return "magUser";
+		}
 		@RequestMapping("/upgradeUser")
 		public String upgradeUser(Integer totalcount, Integer pageCur,
 				HttpSession session, Model model,String account){
 			userService.upgradeUserScale(account);
+			PageInfo  page =pageService.set(totalcount, pageCur);
+			List<User> userList = new ArrayList<User>();
+			userList =userService.findAll(page);
+			totalcount =userService.selectUserCount();
+			int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;	
+			User user = new User();
+			model.addAttribute("User",user);
+			model.addAttribute("totalcount",totalcount);
+			model.addAttribute("userList",userList);
+			model.addAttribute("totalpage",totalpage); 
+			model.addAttribute("pageCur",page.getPageCur());
+			return "magUser";
+		}
+		@RequestMapping("/upgradeSvipUser")
+		public String upgradeSvipUser(Integer totalcount, Integer pageCur,
+				HttpSession session, Model model,String account){
+			userService.upgradeUserScaleSvip(account);
 			PageInfo  page =pageService.set(totalcount, pageCur);
 			List<User> userList = new ArrayList<User>();
 			userList =userService.findAll(page);

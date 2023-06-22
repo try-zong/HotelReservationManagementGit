@@ -69,6 +69,7 @@
 					<th><div style="text-align:center;">年龄</div></th>
 					<th><div style="text-align:center;">名字</div></th>
 					<th><div style="text-align:center;">权限</div></th>
+					<th><div style="text-align:center;">权限管理</div></th>
 					<th><div style="text-align:center;">操作</div></th>
 				</tr>
 			</thead>
@@ -79,9 +80,11 @@
 	    			<td><a th:text="${user.age}"></a></td>
 	    			<td><a th:text="${user.name}"></a></td>
 	    			<td><a th:text="${user.scale}"></a></td>
-	   				<td><a th:href="@{deleteUser(account=${user.account},totalcount=${totalcount})}">删除该用户</a>   
-				    <a th:href="@{degradeUser(account=${user.account},totalcount=${totalcount})}" th:if="${user.scale}!=vip">降为vip</a>
+	   				<td><a th:href="@{degradeUser(account=${user.account},totalcount=${totalcount})}" th:if="${user.scale}==ssvip">降为svip</a>
+	   				<a th:href="@{degradeUser(account=${user.account},totalcount=${totalcount})}" th:if="${user.scale}!=vip">降为vip</a>
+				    <a th:href="@{upgradeUser(account=${user.account},totalcount=${totalcount})}"th:if="${user.scale}==vip">升为svip</a>
 				    <a th:href="@{upgradeUser(account=${user.account},totalcount=${totalcount})}"th:if="${user.scale}!=ssvip">升为ssvip</a></td>  
+					<td><a th:href="@{deleteUser(account=${user.account},totalcount=${totalcount})}">删除该用户</a></td>
 				</tr> 
 			</tbody>
 		 </table>
