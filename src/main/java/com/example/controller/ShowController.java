@@ -42,4 +42,24 @@ public class ShowController {
 		model.addAttribute("sumMoney",sumMoney);
 		return "show";
 	}
+	@RequestMapping("/magMain")
+	public String magMain( Model model) {
+		Hot topOne = new Hot();
+		List<Hot> topThree = new ArrayList<Hot>();
+		List<Hot> roomScale = new ArrayList<Hot>();
+		List<Hot> orderCount = new ArrayList<Hot>();
+		List<Hot> sumMoney = new ArrayList<Hot>();
+		topOne = showService.selectTopOneRoom();
+		topThree = showService.selectTopThreeRoom();
+		roomScale = showService.selectCountGroupByTypes();
+		orderCount = showService.selectOrderCountGroupByCreate();
+		sumMoney = showService.sumMoneyGroupByCreate();
+		//log.info("比例"+String.valueOf(orderCount.get(1).getName()));
+		model.addAttribute("topOne",topOne);
+		model.addAttribute("topThree",topThree);
+		model.addAttribute("roomScale",roomScale);
+		model.addAttribute("orderCount",orderCount);
+		model.addAttribute("sumMoney",sumMoney);
+		return "magMain";
+	}
 }

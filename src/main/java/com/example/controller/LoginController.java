@@ -59,7 +59,7 @@ public class LoginController {
 		if(manager != null) {
 			//登录的用户信息存入session并跳转主页面	
 			//log.info(String.valueOf(menuService.selectMenuByParentId(0)));
-			return "redirect:/magRoom";
+			return "redirect:/magMain";
 		}else {
 			//登录失败，跳回登录页面
 			model.addAttribute("mistake", "登录失败，用户名或密码错误！");

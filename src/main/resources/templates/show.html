@@ -69,14 +69,7 @@
             <h6>最热门的房间</h6>
             <canvas id="barChart" class="chartCanvas"></canvas>
         </div>
-   		<div class="chartContainer">
-            <h6>7日订单数量统计</h6>
-            <canvas id="barChart1" class="chartCanvas"></canvas>
-        </div>
-        <div class="chartContainer">
-            <h6>7日盈利统计</h6>
-            <canvas id="lineChart" class="chartCanvas"></canvas>
-        </div>
+   		
         <div class="chartContainer">
             <h6>房间类型趋势</h6>
             <canvas id="pieChart" class="chartCanvas"></canvas>
@@ -114,66 +107,7 @@
                 }
             }
         });
-		//7日订单数量统计柱状图
-        var barOrderNames = /*[[${orderCount.![name]}]]*/ [];
-        var barOrderCounts = /*[[${orderCount.![num]}]]*/ [];
-
-        var barChartCanvas = document.getElementById('barChart1');
-        var barChartCtx = barChartCanvas.getContext('2d');
-
-        new Chart(barChartCtx, {
-            type: 'bar',
-            data: {
-                labels: barOrderNames,
-                datasets: [{
-                    label: '订单数量',
-                    data: barOrderCounts,
-                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: Math.max(...barOrderCounts) + 1
-                    }
-                }
-            }
-        });
-
-    		//七日盈利折线图
-    		var lineMoneyNames = /*[[${sumMoney.![name]}]]*/ [];
-    		var lineMoneyCounts = /*[[${sumMoney.![num]}]]*/ [];
-    		var lineChartCanvas = document.getElementById('lineChart');
-    		var lineChartCtx = lineChartCanvas.getContext('2d');
-    		new Chart(lineChartCtx, {
-   		    type: 'line',
-        	data: {
-            	labels: lineMoneyNames,
-            		datasets: [{
-                		label: '盈利',
-                		data: lineMoneyCounts,
-                		backgroundColor: 'rgba(75, 192, 192, 0.5)',
-                		borderColor: 'rgba(75, 192, 192, 1)',
-                		borderWidth: 1,
-                		fill: false
-            		}]
-        	},
-        	options: {
-            	responsive: true,
-            	maintainAspectRatio: false,
-            	scales: {
-                	y: {
-                    	beginAtZero: true,
-                    	max: Math.max(...lineMoneyCounts) + 5
-                	}
-            	}
-        	}
-    	});
+		
 
 
         //饼图
@@ -196,7 +130,7 @@
                 labels: pieRoomData.map(function(room) { return room.name; }),
                 datasets: [{
                     data: pieRoomData.map(function(room) { return room.scale; }),
-                    backgroundColor: ['rgba(255, 99, 132, 0.8)', 'rgba(54, 162, 235, 0.8)', 'rgba(255, 206, 86, 0.8)', 'rgba(75, 192, 192, 0.8)'],
+                    backgroundColor: ['rgba(255, 99, 132, 0.8)','rgba(212, 29, 132, 0.8)','rgba(125, 99, 102, 0.8)', 'rgba(255, 206, 86, 0.8)', 'rgba(75, 192, 192, 0.8)'],
                     borderColor: '#fff',
                     borderWidth: 1
                 }]

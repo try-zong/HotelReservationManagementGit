@@ -35,7 +35,7 @@ public class UserController {
 	public String userInfoShow(Model model,HttpSession session){
 		User user = (User)session.getAttribute("User");
 		User userInfo = userService.getOne(user.getAccount());
-		log.info("img"+userInfo.getImg());
+	//	log.info("img"+userInfo.getImg());
 		model.addAttribute("User",userInfo);
 		return "userInfoShow"; 
 	}
@@ -72,11 +72,11 @@ public class UserController {
 		@RequestMapping("/toBackUser")
 		public String toBackUser(@ModelAttribute("User") User user, Model model){
 			if(user.getAccount()==null) {
-				log.info("totalcount=");
+				//log.info("totalcount=");
 				//按返回按钮，返回登录页面
 				return "/login";
 			}
-			log.info(user.getAccount());
+		//	log.info(user.getAccount());
 			User userInfo = userService.getOne(user.getAccount());
 			model.addAttribute("back","密码为"+userInfo.getPassword() );
 				return "backUser";

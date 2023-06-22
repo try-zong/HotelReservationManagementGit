@@ -18,8 +18,8 @@
          <label for="orderId">年龄:</label><input contenteditable="true" type="text" th:field="*{age}" placeholder="年龄" class="input-item"/>
          <label for="orderId">姓名:</label><input contenteditable="true" type="text" th:field="*{name}" placeholder="姓名" class="input-item"/>
          <label for="orderId">密码:</label><input contenteditable="true" type="text" th:field="*{password}" placeholder="密码" class="input-item"/>
-         <input contenteditable="true" type="file" name="file" placeholder="密码" class="input-item"/>
-        <img th:src="*{img}"/>
+         <label for="orderId">头像:</label><img th:src="*{img}" style="width:60px; height:60px;"/><input  type="file" name="file"  class="input-item"/>
+       	 
       </div>
       <div>
 		<input type = "reset" value = "重置" class="edit-btn"/>

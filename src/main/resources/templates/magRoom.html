@@ -23,6 +23,8 @@
             width: 30%;
             height: 30%;
         }
+        
+        
     </style>
 </head>
 <body>
@@ -32,7 +34,7 @@
 <div class="tab-bar">
 <ul class="menu">
         <li>
-            <a href="/show">
+            <a href="/magMain">
                 <i class="el-icon-house"></i>
                 <span>首页</span>
             </a>
@@ -75,10 +77,11 @@
 	            </select>
 	            <input type="submit" name="Submit" value="查询">
 	            <input type="reset" name="Reset" value="重置">
-				<a class="ab" th:href="@{addRoomInfo}">添加房间</a>
+				<a th:href="@{addRoomInfo}"  class="ab">添加房间</a>
 		</form>
 	</div>
 </div>
+
 
 <div class="container">
 	<div class="table-container">

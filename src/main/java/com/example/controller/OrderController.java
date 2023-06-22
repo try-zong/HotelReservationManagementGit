@@ -51,7 +51,7 @@ public class OrderController {
 	@RequestMapping("/toReservation")
 	public String toReservation(@ModelAttribute("order") Order order,
 			HttpSession session, Model model){
-	    log.info(String.valueOf(order.getRoom().getId())+"前"+String.valueOf(order.getRoom().getVersion()));
+	   // log.info(String.valueOf(order.getRoom().getId())+"前"+String.valueOf(order.getRoom().getVersion()));
 		//提取用户信息
 		User user = (User)session.getAttribute("User");
 		order.setUser(user);

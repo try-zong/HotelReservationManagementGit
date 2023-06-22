@@ -5,64 +5,209 @@
     <title>MagMain</title>
      <link rel="stylesheet" type="text/css" href="css/order.css">
       <link rel="stylesheet" type="text/css" href="css/managerOrder.css">
+      <script type="text/javascript" src="${pageContext.request.contextPath }/js/echarts.min.js"></script>
+	<script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+ 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ 	<link rel="stylesheet" type="text/css" href="css/order.css">
+ 	<style>
+        #chartsContainer {
+            display: flex;
+            height: 40vh;
+        }
+
+        .chartContainer {
+            width: 30%;
+            padding: 30px;
+        }
+
+        .chartCanvas {
+            width: 30%;
+            height: 30%;
+        }
+    </style>
 </head>
 <body>
 <div class="main-title">
         <h1>酒店预订系统</h1>
 </div>
 
-<div class="container">
-  
-    <div class="form-container">
-	<form th:action="@{/finding}" method="post" th:object="${Room}"> 
-		 <h2 class="title">房间检索</h2>
-            <input type="text" th:field="*{id}" placeholder="请输入房间号"><br>
-            <label for="roomType">房间类型:</label>
-            <select id="roomType" th:field="*{types}">
-               	<option value="标间">标间</option>
-               	<option value="商务房">商务房</option>
-               	<option value="亲子房">亲子房</option>
-               	<option value="双人房">双人房</option>
-               	<option value="情侣房">情侣房</option>
-           		<option value="大床房">大床房</option>
-            </select>
-            <input type="submit" name="Submit" value="查询">
-            <input type="reset" name="Reset" value="重置">
-	</form>
-	</div>
-	<div class="table-container">
-        <table> 
-			<thead>
-				<tr>
-					<th><div style="text-align:center;">房间号</div></th>
-					<th><div style="text-align:center;">房间类型</div></th>
-					<th><div style="text-align:center;">价格</div></th>
-					<th><div style="text-align:center;">状态</div></th>
-					<th><div style="text-align:center;">评分</div></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="room:${roomList}">
-					<!-- 循环-->       
-					<td><a th:text="${room.id}" ></a></td>    
-	    			<td><a th:text="${room.types}"></a></td>
-	    			<td><a th:text="${room.price}"></a></td>
-	    			<td><a th:text="${room.state}"></a></td>
-	   				<td><a th:text="${room.comment}"></a>
-	   				<a th:href="@{reservation(id=${room.id})}" th:if="${room.state}==可租">预订</a></td>  
-				</tr> 
-			</tbody>
-		 </table>
-	</div>	
-	<div class="pagination-container">
-		<ul>
-			<li><a>共<span th:text="${totalcount}"></span>条记录</a></li>
-			<li><a>共<span th:text="${totalpage}"></span>页</a></li>
-			<li><a>第<span th:text="${pageCur}"></span>页</a></li>
-			<li><a th:href="@{main(totalcount=${totalcount},pageCur=${pageCur}-1)}" th:if="${pageCur!=1}">上一页</a></li>
-			<li><a th:href="@{main(totalcount=${totalcount},pageCur=${pageCur}+1)}" th:if="${pageCur<totalpage}">下一页</a></li>
-		</ul>
-     </div>
-	</div>
+<div class="tab-bar">
+<ul class="menu">
+        <li>
+            <a href="/magMain">
+                <i class="el-icon-house"></i>
+                <span>首页</span>
+            </a>
+        </li>
+        <li>
+            <a href="/magOrder">
+                <i class="el-icon-user"></i>
+                <span>订单管理</span>
+            </a>
+        </li>
+        <li>
+           <a href="/magUser">
+                <i class="el-icon-s-management"></i>
+                <span>用户管理</span>
+            </a>   
+        </li>
+        <li>
+            <a href="/magRoom">
+                <i class="el-icon-message"></i>
+                <span>房间管理</span>
+            </a>
+        </li>
+    </ul>
+</div>
+ <div id="chartsContainer">
+          <div class="chartContainer">
+            <h6>最热门的房间</h6>
+            <canvas id="roseChart" class="chartCanvas"></canvas>
+        </div>
+   		<div class="chartContainer">
+            <h6>7日订单数量统计</h6>
+            <canvas id="barChart1" class="chartCanvas"></canvas>
+        </div>
+        <div class="chartContainer">
+            <h6>7日盈利统计</h6>
+            <canvas id="lineChart" class="chartCanvas"></canvas>
+        </div>
+        <div class="chartContainer">
+            <h6>房间类型趋势</h6>
+            <canvas id="pieChart" class="chartCanvas"></canvas>
+        </div>
+    </div>
+
+    <script th:inline="javascript">
+    //最热门的房间等弧度玫瑰图
+    var roseRoomNames = /*[[${topThree.![name]}]]*/ [];
+    var roseRoomCounts = /*[[${topThree.![num]}]]*/ [];
+
+    var roseChartCanvas = document.getElementById('roseChart');
+    var roseChartCtx = roseChartCanvas.getContext('2d');
+
+    new Chart(roseChartCtx, {
+        type: 'polarArea',
+        data: {
+            labels: roseRoomNames,
+            datasets: [{
+                label: '房间数量',
+                data: roseRoomCounts,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 205, 86, 0.5)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 205, 86, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+		//7日订单数量统计柱状图
+        var barOrderNames = /*[[${orderCount.![name]}]]*/ [];
+        var barOrderCounts = /*[[${orderCount.![num]}]]*/ [];
+
+        var barChartCanvas = document.getElementById('barChart1');
+        var barChartCtx = barChartCanvas.getContext('2d');
+
+        new Chart(barChartCtx, {
+            type: 'bar',
+            data: {
+                labels: barOrderNames,
+                datasets: [{
+                    label: '订单数量',
+                    data: barOrderCounts,
+                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: Math.max(...barOrderCounts) + 1
+                    }
+                }
+            }
+        });
+       
+        
+
+    		//七日盈利折线图
+    		var lineMoneyNames = /*[[${sumMoney.![name]}]]*/ [];
+    		var lineMoneyCounts = /*[[${sumMoney.![num]}]]*/ [];
+    		var lineChartCanvas = document.getElementById('lineChart');
+    		var lineChartCtx = lineChartCanvas.getContext('2d');
+    		new Chart(lineChartCtx, {
+   		    type: 'line',
+        	data: {
+            	labels: lineMoneyNames,
+            		datasets: [{
+                		label: '盈利',
+                		data: lineMoneyCounts,
+                		backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                		borderColor: 'rgba(75, 192, 192, 1)',
+                		borderWidth: 1,
+                		fill: false
+            		}]
+        	},
+        	options: {
+            	responsive: true,
+            	maintainAspectRatio: false,
+            	scales: {
+                	y: {
+                    	beginAtZero: true,
+                    	max: Math.max(...lineMoneyCounts) + 5
+                	}
+            	}
+        	}
+    	});
+
+
+        //饼图
+        var pieRoomData = [
+            /*[# th:each="room : ${roomScale}"]*/
+            {
+                name: /*[[${room.name}]]*/ '',
+                scale: /*[[${room.scale}]]*/ 0,
+                num: /*[[${room.num}]]*/
+            },
+            /*[/]*/
+        ];
+
+        var pieChartCanvas = document.getElementById('pieChart');
+        var pieChartCtx = pieChartCanvas.getContext('2d');
+        
+        new Chart(pieChartCtx, {
+            type: 'pie',
+            data: {
+                labels: pieRoomData.map(function(room) { return room.name; }),
+                datasets: [{
+                    data: pieRoomData.map(function(room) { return room.scale; }),
+                    backgroundColor: ['rgba(255, 99, 132, 0.8)','rgba(212, 29, 132, 0.8)','rgba(125, 99, 102, 0.8)', 'rgba(255, 206, 86, 0.8)', 'rgba(75, 192, 192, 0.8)'],
+                    borderColor: '#fff',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        });
+    </script>
 </body>
 </html>

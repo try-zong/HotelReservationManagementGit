@@ -20,7 +20,7 @@
 			<input type="text" th:field="*{name}" placeholder="请输入姓名" class="input-item" />
 			<div>
 			<input class="btn" type="submit" value="注册" name="Submit"/>
-    		<input class="btn" type="reset" value="清空" name="Reast"/>
+    		<a th:href="@{/login}"><input class="btn"  value="取消" /></a>
     		</div>
     	</div>
 	</form>
