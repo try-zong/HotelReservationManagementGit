@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.entity.Manager;
 import com.example.entity.PageInfo;
+
 import com.example.entity.User;
 
 
@@ -26,5 +27,8 @@ public interface UserService {
 	//根据账号密码获取用户信息
 	public Manager findManagerByIdAndpwd(int id,String password);
 	public int getManagerId(int id);	//获得一个用户信息
+	public List<User> selectUserByScale(String scale,PageInfo page);	//根据权限搜索用户
+	public int degradeUserScale(String account);	//降低用户权限
+	public int upgradeUserScale(String account);	//升级用户权限
 
 }

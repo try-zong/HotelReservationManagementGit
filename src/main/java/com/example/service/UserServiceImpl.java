@@ -104,5 +104,25 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return userMapper.getManagerId(id);
 	}
+
+	@Override
+	public List<User> selectUserByScale(String scale, PageInfo page) {
+		// TODO Auto-generated method stub
+		int rows = page.getRows();
+		int offset = page.getOffset();
+		return userMapper.selectUserByScale(scale, offset, rows);
+	}
+
+	@Override
+	public int degradeUserScale(String account) {
+		// TODO Auto-generated method stub
+		return userMapper.degradeUserScale(account);
+	}
+
+	@Override
+	public int upgradeUserScale(String account) {
+		// TODO Auto-generated method stub
+		return userMapper.upgradeUserScale(account);
+	}
 	
 }

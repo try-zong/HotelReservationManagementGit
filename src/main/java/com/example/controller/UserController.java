@@ -2,6 +2,7 @@ package com.example.controller;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.entity.PageInfo;
+import com.example.entity.Room;
 import com.example.entity.User;
 import com.example.service.PageService;
 import com.example.service.UserService;
@@ -33,6 +35,7 @@ public class UserController {
 	public String userInfoShow(Model model,HttpSession session){
 		User user = (User)session.getAttribute("User");
 		User userInfo = userService.getOne(user.getAccount());
+		log.info("img"+userInfo.getImg());
 		model.addAttribute("User",userInfo);
 		return "userInfoShow"; 
 	}
@@ -90,6 +93,70 @@ public class UserController {
 			totalcount =userService.selectUserCount();
 		//	log.info("totalcount="+ totalcount);
 			int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;	
+			User user = new User();
+			model.addAttribute("User",user);
+			model.addAttribute("totalcount",totalcount);
+			model.addAttribute("userList",userList);
+			model.addAttribute("totalpage",totalpage); 
+			model.addAttribute("pageCur",page.getPageCur());
+			return "magUser";
+		}
+		//根据用户名筛选用户
+		@RequestMapping("/selectUser")
+		public String selectUser(Integer totalcount, Integer pageCur,
+				HttpSession session, Model model,@ModelAttribute User user ){
+			String account = user.getAccount();
+			String scale = user.getScale();
+			List<User> userList = new ArrayList<User>();
+			User userNew = new User();
+			PageInfo  page =pageService.set(totalcount, pageCur);
+			if(account!= "" && scale != null) {
+				userList = Arrays.asList(userService.getOne(account));
+			}else if(scale!=null) {
+				userList = userService.selectUserByScale(scale, page);
+			}else {
+				totalcount =userService.selectUserCount();
+				// 分页查询 
+				userList =userService.findAll(page);
+			}
+			totalcount =userList.size();
+			int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;		
+			model.addAttribute("User",userNew);
+			model.addAttribute("totalcount",totalcount);
+			model.addAttribute("userList",userList);
+			model.addAttribute("totalpage",totalpage); 
+			model.addAttribute("pageCur",page.getPageCur());
+			return "magUser";
+		}
+		//管理用户权限
+		@RequestMapping("/degradeUser")
+		public String degradeUser(Integer totalcount, Integer pageCur,
+				HttpSession session, Model model,String account){
+			userService.degradeUserScale(account);
+			PageInfo  page =pageService.set(totalcount, pageCur);
+			List<User> userList = new ArrayList<User>();
+			userList =userService.findAll(page);
+			totalcount =userService.selectUserCount();
+			int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;	
+			User user = new User();
+			model.addAttribute("User",user);
+			model.addAttribute("totalcount",totalcount);
+			model.addAttribute("userList",userList);
+			model.addAttribute("totalpage",totalpage); 
+			model.addAttribute("pageCur",page.getPageCur());
+			return "magUser";
+		}
+		@RequestMapping("/upgradeUser")
+		public String upgradeUser(Integer totalcount, Integer pageCur,
+				HttpSession session, Model model,String account){
+			userService.upgradeUserScale(account);
+			PageInfo  page =pageService.set(totalcount, pageCur);
+			List<User> userList = new ArrayList<User>();
+			userList =userService.findAll(page);
+			totalcount =userService.selectUserCount();
+			int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;	
+			User user = new User();
+			model.addAttribute("User",user);
 			model.addAttribute("totalcount",totalcount);
 			model.addAttribute("userList",userList);
 			model.addAttribute("totalpage",totalpage); 

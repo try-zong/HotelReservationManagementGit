@@ -2,6 +2,7 @@ package com.example.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.example.entity.Manager;
@@ -28,4 +29,7 @@ public interface UserMapper {
 	@Select("select id from manager where id=#{id}")
 	public int getManagerId(int Id);	//获得一个用户信息
 	public int saveUser(User user); //修改用户信息
+	public List<User> selectUserByScale(@Param("scale")String scale,@Param("offset")int offset,@Param("rows")int rows );	//根据权限搜索用户
+	public int degradeUserScale(String account);	//降低用户权限
+	public int upgradeUserScale(String account);	//升级用户权限
 }

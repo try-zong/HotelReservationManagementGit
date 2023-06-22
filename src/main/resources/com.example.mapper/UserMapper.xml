@@ -30,4 +30,21 @@
     <select id="findManagerByIdAndpwd"  resultType="Manager" > 
     	select * from manager where id=#{id} and password=#{password}
     </select > 
+    <select id="selectUserByScale"  resultType="User" > 
+    	select * from user 	
+    	<where>
+    		<if test="scale!=null">
+    			and scale=#{scale} 
+    		</if>
+    	</where>
+    		limit #{offset},#{rows}
+    </select >
+    <update id="degradeUserScale"  >
+		update User set scale="vip"
+		where account=#{account}
+	</update>
+	<update id="upgradeUserScale"  >
+		update User set scale="ssvip"
+		where account=#{account}
+	</update>
 </mapper> 

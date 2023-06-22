@@ -42,7 +42,23 @@
 
 
 
-
+<div class="chartsContainer">
+	<div class="form-container">
+		<form th:action="@{/selectUser}" method="post" th:object="${User}"> 
+			 <h2 class="title">用户检索</h2>
+			 <label for="orderId">用户名:</label>
+	            <input type="text"  th:field="*{account}" placeholder="请输入用户名">
+	            <label for="roomType">用户权限</label>
+	            <select  th:field="*{scale}">
+	                <option value="vip">vip</option>
+	               	<option value="svip">svip</option>
+	               	<option value="ssvip">ssvip</option>
+	            </select>
+	            <input type="submit" name="Submit" value="查询">
+	            <input type="reset" name="Reset" value="重置">
+		</form>
+	</div>
+</div>
 
 <div class="container">
 	  <div class="table-container">
@@ -52,6 +68,7 @@
 					<th><div style="text-align:center;">账号名</div></th>
 					<th><div style="text-align:center;">年龄</div></th>
 					<th><div style="text-align:center;">名字</div></th>
+					<th><div style="text-align:center;">权限</div></th>
 					<th><div style="text-align:center;">操作</div></th>
 				</tr>
 			</thead>
@@ -61,7 +78,10 @@
 					<td><a th:text="${user.account}" ></a></td>    
 	    			<td><a th:text="${user.age}"></a></td>
 	    			<td><a th:text="${user.name}"></a></td>
-	   				<td><a th:href="@{deleteUser(account=${user.account},totalcount=${totalcount})}">删除该用户</a></td>  
+	    			<td><a th:text="${user.scale}"></a></td>
+	   				<td><a th:href="@{deleteUser(account=${user.account},totalcount=${totalcount})}">删除该用户</a>   
+				    <a th:href="@{degradeUser(account=${user.account},totalcount=${totalcount})}" th:if="${user.scale}!=vip">降为vip</a>
+				    <a th:href="@{upgradeUser(account=${user.account},totalcount=${totalcount})}"th:if="${user.scale}!=ssvip">升为ssvip</a></td>  
 				</tr> 
 			</tbody>
 		 </table>
