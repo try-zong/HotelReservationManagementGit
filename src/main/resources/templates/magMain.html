@@ -27,9 +27,15 @@
     </style>
 </head>
 <body>
-<div class="main-title">
-        <h1>酒店预订系统</h1>
-</div>
+  <div class="main-title">
+		<h1 style="display: inline-block; margin-right: auto;">酒店预订系统</h1>
+		<div style="display: inline-block; float: right;">
+ 			<div  style="display: inline-block; vertical-align: middle; margin-left: 20px;">
+ 				<br><a>欢迎管理员：</a><br>
+ 				<a th:text="${session.User.account}"></a>
+ 			</div>
+		</div>
+    </div>
 
 <div class="tab-bar">
 <ul class="menu">
@@ -96,7 +102,9 @@
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.5)',
                     'rgba(54, 162, 235, 0.5)',
-                    'rgba(255, 205, 86, 0.5)'
+                    'rgba(255, 205, 86, 0.5)',
+                    'rgba(234, 221, 86, 0.5)',
+                    'rgba(211, 156, 86, 0.5)'
                 ],
                 borderColor: [
                     'rgba(255, 99, 132, 1)',

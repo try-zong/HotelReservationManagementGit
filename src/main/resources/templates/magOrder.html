@@ -7,8 +7,14 @@
     <link rel="stylesheet" type="text/css" href="css/managerOrder.css">
 </head>
 <body>
- <div class="main-title">
-        <h1>酒店预订系统</h1>
+ 	<div class="main-title">
+		<h1 style="display: inline-block; margin-right: auto;">酒店预订系统</h1>
+		<div style="display: inline-block; float: right;">
+ 			<div  style="display: inline-block; vertical-align: middle; margin-left: 20px;">
+ 				<br><a>欢迎管理员：</a><br>
+ 				<a th:text="${session.User.account}"></a>
+ 			</div>
+		</div>
     </div>
 <div class="tab-bar">
 <ul class="menu">

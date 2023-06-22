@@ -12,7 +12,7 @@ public class GlobalExceptionHandlerController {
 		if(e instanceof SQLException) {
 			return "error";
 		}else{
-			return "error";
+			return "OtherError";
 		}
 	}
 }

@@ -134,7 +134,7 @@ public class RoomServiceImpl implements RoomService {
                 // 将上传的文件保存到服务器文件系统
                 file.transferTo(saveFile);
                 // 记录服务器文件系统图片名称
-                room.setImg(filePath);
+                room.setImg("\\img\\"+fileName);
             } catch (IOException e) {
                 e.printStackTrace();
             }

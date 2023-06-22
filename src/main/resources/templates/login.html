@@ -33,10 +33,10 @@
             	<div >
                 <a th:href="@{/magLogin}" class="btn1" >管理员登录</a>
                 </div>
-            <div class="msg">
-                <a th:href="@{/add}">点击这里注册</a>
+            <div class="msg" style="float: right;">
+                <a th:href="@{/add}"th:style="'color: red;'">点击这里注册</a>
             </div>
-            <div class="msg">
+            <div class="msg" style="float: left;">
                 <a th:href="@{/BackUser}"th:style="'color: red;'" >找回密码</a>
             </div>
             </form>
