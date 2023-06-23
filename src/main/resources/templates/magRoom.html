@@ -71,9 +71,9 @@
 		<form th:action="@{/selecting}" method="post" th:object="${Room}"> 
 			 <h2 class="title">房间检索</h2>
 			 <label for="orderId">房间号:</label>
-	            <input type="text" id="orderId" th:field="*{id}" placeholder="请输入房间号">
+	            <input  style="width: 200px;" type="text" id="orderId" th:field="*{id}" placeholder="请输入房间号">
 	            <label for="roomType">房间类型:</label>
-	            <select id="roomType" th:field="*{types}">
+	            <select style="width: 200px;"id="roomType" th:field="*{types}">
 	                <option value="标间">标间</option>
 	               	<option value="商务房">商务房</option>
 	               	<option value="亲子房">亲子房</option>
@@ -83,7 +83,7 @@
 	            </select>
 	            <input type="submit" name="Submit" value="查询">
 	            <input type="reset" name="Reset" value="重置">
-				<a th:href="@{addRoomInfo}"  class="ab">添加房间</a>
+				<a style="margin-left: 30px;display: flex;align-items: center; height: 36px; padding-left: 35px;" th:href="@{addRoomInfo}"  class="ab">添加房间</a>
 		</form>
 	</div>
 </div>
