@@ -5,9 +5,9 @@
         }
 
         .container {
-            height: calc(100vh - 280px);
+            height: calc(150vh - 280px);
             margin: 0 auto;
-            padding: 20px;
+            padding: 10px;
         }
 
         /* Header styles */
@@ -73,7 +73,7 @@
         .table-container {
             border: 1px solid #394154;
             max-height: calc(100vh - 310px);
-            overflow-x: hidden;
+            
             width: calc(100% - 250px);
             box-shadow: #2B3245;
             margin: auto;
@@ -93,8 +93,9 @@
         }
 
         /* Pagination styles */
+        
         .pagination-container {
-            margin-top: 20px;
+            margin-top: 5px;
             text-align: center;
         }
         .pointer {

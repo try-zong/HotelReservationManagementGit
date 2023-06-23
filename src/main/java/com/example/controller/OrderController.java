@@ -90,7 +90,7 @@ public class OrderController {
 	    //List<Hot> topThree = new ArrayList<Hot>();			
 		//topThree = showService.selectTopThreeRoom();
 	    //model.addAttribute("topThree",topThree);		
-		int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;	
+		int totalpage = totalcount % 4==0?totalcount/4:totalcount/4+1;	
 		model.addAttribute("orderList",orderList);
 		model.addAttribute("AllOrder", allOrder);
 		model.addAttribute("totalcount",totalcount);
@@ -116,7 +116,7 @@ public class OrderController {
 			orderList =orderService.selectOrderByUserAccountAndPage(user.getAccount(), page);
 		}
 		totalcount=orderList.size();
-		int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;	
+		int totalpage = totalcount % 4==0?totalcount/4:totalcount/4+1;	
 		model.addAttribute("orderList",orderList);
 		model.addAttribute("AllOrder", ordernew);
 		model.addAttribute("totalcount",totalcount);
@@ -150,7 +150,7 @@ public class OrderController {
 		List<Order> orderList = new ArrayList<Order>();
 		orderList =orderService.selectDeletedOrderByUserAccountAndPage(user.getAccount(), page);
 		totalcount =orderService.selectDeletedOrderCountByUserAccountAndPage(user.getAccount());
-		int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;	
+		int totalpage = totalcount % 4==0?totalcount/4:totalcount/4+1;	
 		model.addAttribute("orderList",orderList);
 		model.addAttribute("AllOrder", allOrder);
 		model.addAttribute("totalcount",totalcount);
@@ -175,7 +175,7 @@ public class OrderController {
 			orderList =orderService.selectOrderByUserAccountAndPage(user.getAccount(), page);
 		}
 		totalcount=orderList.size();
-		int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;	
+		int totalpage = totalcount % 4==0?totalcount/4:totalcount/4+1;	
 		model.addAttribute("orderList",orderList);
 		model.addAttribute("AllOrder", ordernew);
 		model.addAttribute("totalcount",totalcount);
@@ -210,7 +210,7 @@ public class OrderController {
 		List<Order> orderList = new ArrayList<Order>();
 		orderList =orderService.selectAllOrderByPage(page);
 		totalcount =orderService.selectOrderCount();
-		int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;	
+		int totalpage = totalcount % 4==0?totalcount/4:totalcount/4+1;	
 		model.addAttribute("orderList",orderList);
 		model.addAttribute("AllOrder", allOrder);
 		model.addAttribute("totalcount",totalcount);
@@ -236,7 +236,7 @@ public class OrderController {
 			orderList =orderService.selectAllOrderByPage(page);
 		}
 		totalcount=orderList.size();
-		int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;	
+		int totalpage = totalcount % 4==0?totalcount/4:totalcount/4+1;	
 		model.addAttribute("orderList",orderList);
 		model.addAttribute("AllOrder", ordernew);
 		model.addAttribute("totalcount",totalcount);

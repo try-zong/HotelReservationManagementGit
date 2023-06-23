@@ -41,7 +41,7 @@ public class RoomInfoController {
 		totalcount =roomService.selectRoomCount();
 		// 分页查询         
 		List<Room> roomList =roomService.selectAllRoomByPage(page);
-		int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;
+		int totalpage = totalcount % 4==0?totalcount/4:totalcount/4+1;
 		Room roomnew = new Room();
 	//	log.info("totalpag="+String.valueOf(totalpage));
 	//	log.info("PageCur="+String.valueOf(page.getPageCur()));
@@ -74,7 +74,7 @@ public class RoomInfoController {
 			roomList =roomService.selectAllRoomByPage(page);
 		}
 		totalcount =roomList.size();
-		int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;
+		int totalpage = totalcount % 4==0?totalcount/4:totalcount/4+1;
 		List<Hot> topThree = new ArrayList<Hot>();
 		topThree = showService.selectTopThreeRoom();
 		model.addAttribute("topThree",topThree);
@@ -97,7 +97,7 @@ public class RoomInfoController {
 		totalcount =roomService.selectRoomCount();
 		// 分页查询         
 		List<Room> roomList =roomService.selectAllRoomByPage(page);
-		int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;
+		int totalpage = totalcount % 4==0?totalcount/4:totalcount/4+1;
 		Room roomnew = new Room();
 		model.addAttribute("Room", roomnew);		
 		model.addAttribute("roomList",roomList);
@@ -125,7 +125,7 @@ public class RoomInfoController {
 			roomList =roomService.selectAllRoomByPage(page);
 		}
 		totalcount =roomList.size();
-		int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;	
+		int totalpage = totalcount % 4==0?totalcount/4:totalcount/4+1;	
 		model.addAttribute("roomList",roomList);
 		model.addAttribute("Room", roomnew);
 		model.addAttribute("totalcount",totalcount);

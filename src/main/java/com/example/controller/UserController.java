@@ -92,7 +92,7 @@ public class UserController {
 			userList =userService.findAll(page);
 			totalcount =userService.selectUserCount();
 		//	log.info("totalcount="+ totalcount);
-			int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;	
+			int totalpage = totalcount % 4==0?totalcount/4:totalcount/4+1;	
 			User user = new User();
 			model.addAttribute("User",user);
 			model.addAttribute("totalcount",totalcount);
@@ -120,7 +120,7 @@ public class UserController {
 				userList =userService.findAll(page);
 			}
 			totalcount =userList.size();
-			int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;		
+			int totalpage = totalcount %4==0?totalcount/4:totalcount/4+1;		
 			model.addAttribute("User",userNew);
 			model.addAttribute("totalcount",totalcount);
 			model.addAttribute("userList",userList);
@@ -137,7 +137,7 @@ public class UserController {
 			List<User> userList = new ArrayList<User>();
 			userList =userService.findAll(page);
 			totalcount =userService.selectUserCount();
-			int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;	
+			int totalpage = totalcount % 4==0?totalcount/4:totalcount/4+1;	
 			User user = new User();
 			model.addAttribute("User",user);
 			model.addAttribute("totalcount",totalcount);
@@ -154,7 +154,7 @@ public class UserController {
 			List<User> userList = new ArrayList<User>();
 			userList =userService.findAll(page);
 			totalcount =userService.selectUserCount();
-			int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;	
+			int totalpage = totalcount % 4==0?totalcount/4:totalcount/4+1;	
 			User user = new User();
 			model.addAttribute("User",user);
 			model.addAttribute("totalcount",totalcount);
@@ -171,7 +171,7 @@ public class UserController {
 			List<User> userList = new ArrayList<User>();
 			userList =userService.findAll(page);
 			totalcount =userService.selectUserCount();
-			int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;	
+			int totalpage = totalcount % 4==0?totalcount/4:totalcount/4+1;	
 			User user = new User();
 			model.addAttribute("User",user);
 			model.addAttribute("totalcount",totalcount);
@@ -188,7 +188,7 @@ public class UserController {
 			List<User> userList = new ArrayList<User>();
 			userList =userService.findAll(page);
 			totalcount =userService.selectUserCount();
-			int totalpage = totalcount % 5==0?totalcount/5:totalcount/5+1;	
+			int totalpage = totalcount % 4==0?totalcount/4:totalcount/4+1;	
 			User user = new User();
 			model.addAttribute("User",user);
 			model.addAttribute("totalcount",totalcount);

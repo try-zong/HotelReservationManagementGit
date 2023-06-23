@@ -97,8 +97,8 @@
 				<li><a>共<span th:text="${totalcount}"></span>条记录</a></li>
 				<li><a>共<span th:text="${totalpage}"></span>页</a></li>
 				<li><a>第<span th:text="${pageCur}"></span>页</a></li>
-				<li><a th:href="@{manageOrder(totalcount=${totalcount},pageCur=${pageCur}-1)}" th:if="${pageCur!=1}">上一页</a></li>
-				<li><a th:href="@{manageOrder(totalcount=${totalcount},pageCur=${pageCur}+1)}" th:if="${pageCur<totalpage}">下一页</a></li>
+				<li><a th:href="@{magOrder(totalcount=${totalcount},pageCur=${pageCur}-1)}" th:if="${pageCur!=1}">上一页</a></li>
+				<li><a th:href="@{magOrder(totalcount=${totalcount},pageCur=${pageCur}+1)}" th:if="${pageCur<totalpage}">下一页</a></li>
 			</ul>
        	</div>
 </div>
