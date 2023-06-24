@@ -64,16 +64,18 @@ public class RoomInfoController {
 		List<Room> roomList = new ArrayList<Room>();
 		PageInfo  page = pageService.set(totalcount, pageCur);
 		Room roomnew = new Room();
-		if(id != null && types != null) {
+		if(id != null) {
 			roomList = Arrays.asList(roomService.getOne(id));
-		}else if(types!=null) {
+			totalcount =roomList.size();
+		}else if(types!="") {
 			roomList = roomService.selectRoomByTypes(types,page);
+			totalcount =roomList.size();
 		}else {
 			totalcount =roomService.selectRoomCount();
 			// 分页查询 
 			roomList =roomService.selectAllRoomByPage(page);
 		}
-		totalcount =roomList.size();
+		
 		int totalpage = totalcount % 4==0?totalcount/4:totalcount/4+1;
 		List<Hot> topThree = new ArrayList<Hot>();
 		topThree = showService.selectTopThreeRoom();
@@ -115,16 +117,22 @@ public class RoomInfoController {
 		List<Room> roomList = new ArrayList<Room>();
 		PageInfo  page = pageService.set(totalcount, pageCur);
 		Room roomnew = new Room();
-		if(id != null && types != null) {
+		if(id !=null ) {
+			//log.info("1z");
 			roomList = Arrays.asList(roomService.getOne(id));
-		}else if(types!=null) {
+			totalcount =roomList.size();
+		}else if(types!="") {
+			//log.info("2z");
 			roomList = roomService.selectRoomByTypes(types,page);
+			totalcount =roomList.size();
 		}else {
 			totalcount =roomService.selectRoomCount();
 			// 分页查询 
 			roomList =roomService.selectAllRoomByPage(page);
+			//log.info("z");
+			
 		}
-		totalcount =roomList.size();
+		
 		int totalpage = totalcount % 4==0?totalcount/4:totalcount/4+1;	
 		model.addAttribute("roomList",roomList);
 		model.addAttribute("Room", roomnew);

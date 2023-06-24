@@ -110,16 +110,18 @@ public class UserController {
 			List<User> userList = new ArrayList<User>();
 			User userNew = new User();
 			PageInfo  page =pageService.set(totalcount, pageCur);
-			if(account!= "" && scale != null) {
+			if(account!= "") {
 				userList = Arrays.asList(userService.getOne(account));
-			}else if(scale!=null) {
+				totalcount =userList.size();
+			}else if(scale!="") {
 				userList = userService.selectUserByScale(scale, page);
+				totalcount =userList.size();
 			}else {
 				totalcount =userService.selectUserCount();
 				// 分页查询 
 				userList =userService.findAll(page);
 			}
-			totalcount =userList.size();
+			
 			int totalpage = totalcount %4==0?totalcount/4:totalcount/4+1;		
 			model.addAttribute("User",userNew);
 			model.addAttribute("totalcount",totalcount);

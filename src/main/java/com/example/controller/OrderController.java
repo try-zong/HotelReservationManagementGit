@@ -108,14 +108,17 @@ public class OrderController {
 		List<Order> orderList = new ArrayList<Order>();
 		PageInfo  page = pageService.set(totalcount, pageCur);
 		Order ordernew = new Order();
-		if(id != null && types != null) {
+		if(id != null) {
 			orderList = Arrays.asList(orderService.getOne(id));
-		}else if(types!= null) {
+			totalcount=orderList.size();
+		}else if(types!= "") {
 			orderList = orderService.selectOrderByUserAccountAndTypesAndPage(user.getAccount(), types, page);
+			totalcount=orderList.size();
 		}else {
 			orderList =orderService.selectOrderByUserAccountAndPage(user.getAccount(), page);
+			totalcount =orderService.selectOrderCountByUserAccountAndPage(user.getAccount());
 		}
-		totalcount=orderList.size();
+		
 		int totalpage = totalcount % 4==0?totalcount/4:totalcount/4+1;	
 		model.addAttribute("orderList",orderList);
 		model.addAttribute("AllOrder", ordernew);
@@ -167,14 +170,17 @@ public class OrderController {
 		List<Order> orderList = new ArrayList<Order>();
 		PageInfo  page = pageService.set(totalcount, pageCur);
 		Order ordernew = new Order();
-		if(id != null && types != null) {
+		if(id != null) {
 			orderList = Arrays.asList(orderService.getOne(id));
-		}else if(types!= null) {
+			totalcount=orderList.size();
+		}else if(types!= "") {
 			orderList = orderService.selectOrderByUserAccountAndTypesAndPage(user.getAccount(), types, page);
+			totalcount=orderList.size();
 		}else {
 			orderList =orderService.selectOrderByUserAccountAndPage(user.getAccount(), page);
+			totalcount =orderService.selectDeletedOrderCountByUserAccountAndPage(user.getAccount());
 		}
-		totalcount=orderList.size();
+		
 		int totalpage = totalcount % 4==0?totalcount/4:totalcount/4+1;	
 		model.addAttribute("orderList",orderList);
 		model.addAttribute("AllOrder", ordernew);
@@ -227,15 +233,18 @@ public class OrderController {
 		List<Order> orderList = new ArrayList<Order>();
 		PageInfo  page = pageService.set(totalcount, pageCur);
 		Order ordernew = new Order();
-		if(id != null && types != null) {
+		if(id != null) {
 			orderList = Arrays.asList(orderService.getOne(id));
-		}else if(types != null) {
+			totalcount=orderList.size();
+		}else if(types != "") {
 		//	log.info(types);
 			orderList = orderService.selectOrderByTypes(types, page);
+			totalcount=orderList.size();
 		}else {
+			totalcount =orderService.selectOrderCount();
 			orderList =orderService.selectAllOrderByPage(page);
 		}
-		totalcount=orderList.size();
+		
 		int totalpage = totalcount % 4==0?totalcount/4:totalcount/4+1;	
 		model.addAttribute("orderList",orderList);
 		model.addAttribute("AllOrder", ordernew);
