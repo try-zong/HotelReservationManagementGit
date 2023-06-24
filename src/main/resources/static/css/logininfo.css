@@ -21,12 +21,12 @@
         .login-wrapper {
             background-color: rgba(255,255,255,0.6);;
             width: 358px;
-            height: 588px;
+            height: 337px;
             border-radius: 15px;
             padding: 20px 50px;
-            position: relative;
+            position: fixed;
             left: 50%;
-            top: 50%;
+            top: 57%;
             transform: translate(-50%, -50%);
         }
         .login-wrapper h2 {

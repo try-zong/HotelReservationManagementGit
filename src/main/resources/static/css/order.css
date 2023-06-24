@@ -2,10 +2,11 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            overflow: hidden;
         }
 
         .container {
-            height: calc(150vh - 280px);
+            height: calc(100vh - 280px);
             margin: 0 auto;
             padding: 10px;
         }
@@ -25,14 +26,13 @@
         /* Form styles */
         .form-container {
             margin-bottom: 20px;
-            height:100px;
+            height:35px;
             
            
         }
 
         .form-container h2 {
             margin-bottom: 10px;
-            margin-bottom: 40px;
         }
 
         .form-container input[type="text"],
@@ -72,11 +72,10 @@
         /* Table styles */
         .table-container {
             border: 1px solid #394154;
-            max-height: calc(100vh - 310px);
             
             width: calc(100% - 250px);
             box-shadow: #2B3245;
-            margin: auto;
+            margin-left: 180px;
             margin-top: 30px;
             box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
         }
@@ -95,7 +94,7 @@
         /* Pagination styles */
         
         .pagination-container {
-            margin-top: 5px;
+            margin-top: 14px;
             text-align: center;
         }
         .pointer {
