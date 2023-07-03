@@ -42,6 +42,14 @@
                 <span>房间管理</span>
             </a>
         </li>
+        <li>
+        	<a href="/">
+            <span>
+                <i class="el-icon-s-tools"></i>
+                <span>登出</span>
+            </span>
+        	</a>
+        </li>
     </ul>
 </div>
 
@@ -50,7 +58,7 @@
 		<form th:action="@{/selectOrder}" method="post" th:object="${AllOrder}"> 
 			<h2 class="title">订单检索</h2>
 			 	<label for="orderId">房间号:</label>
-				<input type="text" id="orderId" th:field="*{id}" placeholder="请输入房间号">
+				<input type="text" id="orderId" th:field="*{id}" placeholder="请输入订单号">
 	            <label for="roomType">房间类型:</label>
 	            <select id="roomType" th:field="*{types}">
 	            		<option value=""></option>

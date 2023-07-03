@@ -57,7 +57,7 @@ public class OrderController {
 		order.setUser(user);
 		order.setUser_account2(user.getAccount());
 		log.info("12");
-		if(order.getRoom().getId()==null) {
+		if(order.getId()==null) {
 			//如果前端传来的房号为空，返回房间显示页面
 			log.info("45");
 			return "redirect:/main";

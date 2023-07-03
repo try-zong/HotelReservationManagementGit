@@ -88,9 +88,16 @@ public class UserServiceImpl implements UserService {
         }
 		return userMapper.saveUser(user);
 	}
+	@Override
+	public User getPwd(User user) {
+		// TODO Auto-generated method stub
+		return userMapper.getPwd(user);
+	}
 
 	//管理员方法
 	//根据账号密码获取用户信息
+
+
 
 
 	@Override

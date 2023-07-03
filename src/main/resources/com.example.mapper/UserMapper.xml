@@ -25,7 +25,9 @@
 		update User set account=#{account},age=#{age},name=#{name},img=#{img} 
 		where account=#{account}
 	</update>
-    
+    <select id="getPwd"  resultType="User" > 
+    	select * from user where account=#{account} and name=#{name}
+    </select > 
     <!--管理员语句-->
     <select id="findManagerByIdAndpwd"  resultType="Manager" > 
     	select * from manager where id=#{id} and password=#{password}

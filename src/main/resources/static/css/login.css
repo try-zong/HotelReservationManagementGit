@@ -18,7 +18,7 @@
             width: 358px;
             height: 588px;
             border-radius: 15px;
-            padding: 20px 50px;
+            padding: 30px 50px;
             position: relative;
             left: 50%;
             top: 50%;
@@ -51,7 +51,7 @@
         	border: none;
             text-align: center;
             padding: 10px;
-            width: 100%;
+            width: 380px;
             margin-top: 16px;
             background-image: linear-gradient(to right, #a6c1ee, #fbc2eb);
             color: #fff;
@@ -62,6 +62,7 @@
     		justify-content: center;
     		align-items: center;
     		padding: 10px;
+    		width:360px;
     		
    		 	margin-top: 16px;
     		background-image: linear-gradient(to right, #a6c1ee, #fbc2eb);

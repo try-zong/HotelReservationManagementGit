@@ -23,6 +23,7 @@ public interface UserService {
 	//根据账号密码获取用户信息
 	public User findUserByAccountAndpwd(String account,String password);
     public int saveUser(User user,MultipartFile file); //修改用户信息
+    public User getPwd(User user); //找回密码
 	//管理员方法
 	//根据账号密码获取用户信息
 	public Manager findManagerByIdAndpwd(int id,String password);

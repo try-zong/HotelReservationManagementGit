@@ -71,10 +71,11 @@ public class UserController {
 		}
 		@RequestMapping("/toBackUser")
 		public String toBackUser(@ModelAttribute("User") User user, Model model){
-			if(user.getAccount()==null) {
+			if(userService.getPwd(user)==null) {
 				//log.info("totalcount=");
 				//按返回按钮，返回登录页面
-				return "/login";
+				model.addAttribute("back","验证信息不正确，请检查后重新输入！");
+				return "backUser";
 			}
 		//	log.info(user.getAccount());
 			User userInfo = userService.getOne(user.getAccount());
